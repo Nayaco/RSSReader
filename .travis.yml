@@ -15,4 +15,3 @@ script:
   - cd ./App
   - qmake
   - make --silent
-  - ./travis_qmake_gcc_cpp17
