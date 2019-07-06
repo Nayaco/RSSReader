@@ -12,6 +12,7 @@ install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 90
 
 script: 
+  - cd ./App
   - qmake
   - make --silent
   - ./travis_qmake_gcc_cpp17
