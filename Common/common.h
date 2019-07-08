@@ -23,8 +23,8 @@ class CommmandBase {
 protected:
     static const int arg_size = sizeof...(Args);
 public:
-    void Bind(const Args &...arguments) = 0;
-    void Exec() = 0;
+    virtual void Bind(const Args &...arguments) = 0;
+    virtual void Exec() = 0;
 };
 
 template<typename T>
@@ -41,9 +41,9 @@ protected:
     vector<shared_ptr<T>> notifications;
 };
 
-
-class BaseProperty {
-
+class PropertyChangeNotification {
+public:
+    virtual 
 };
 
 #endif
