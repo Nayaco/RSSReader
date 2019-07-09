@@ -58,7 +58,7 @@ public:
 template<typename T>
 class CommandNotification {
 public:
-    virtual void OnCommandComplete(s);
+    virtual void OnCommandComplete();
 
 };
 
