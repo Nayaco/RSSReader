@@ -1,33 +1,37 @@
 #ifndef CHANNEL_H
 #define CHANNEL_H
 
-#include "common.h"
+#include "common/common.h"
+#include "iobject.h"
+#include "item.h"
 
-class Channel {
+class Channel: public IObject {
 public:
 Channel();
 Channel(const Channel& chan) = delete;
 Channel(const Channel&& chan);
 ~Channel()=default;
 
-void DeepCopy(const Channel& chan);
-std::string GetTitle();
-std::string SetTitle();
-std::string GetDesc();
-std::string SetDesc();
-std::string GetLink();
-std::string SetLink();
+string GetTitle();
+void SetTitle(const string& str);
+string GetDesc();
+void SetDesc(const string& str);
+string GetLink();
+void SetLink(const string& str);
+vector<shared_ptr<Item>>& GetItems();
+void AddItem(const shared_ptr<Item>& _item);
+void ClearItem();
 
-void Update();
+void DeepCopy(const Channel& chan);
 
 private:
-std::string description;
-std::string ttl;
-std::string link;
+string description;
+string title;
+string link;
+vector<shared_ptr<Item>> items;
 
-void get(const std::string& element);
-void sendRequest();
-
+virtual string get(const string& key) override;
+virtual void set(const string& key, const string& element) override;
 
 };
 

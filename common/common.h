@@ -2,7 +2,11 @@
 #define GLOBAL_COMMON_H
 
 #include <memory>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 #include <cstdint>
+
 typedef unsigned char uchar;
 #if defined(_WIN32) 
 typedef uint64_t uint64;
@@ -13,6 +17,10 @@ typedef uint64_t uint64;
 #endif
 #include <string>
 #include <vector>
+#include <queue>
+#include <list>
+#include <map>
+#include <unordered_map>
 
 using std::shared_ptr;
 using std::vector;
@@ -41,9 +49,17 @@ protected:
     vector<shared_ptr<T>> notifications;
 };
 
-class PropertyChangeNotification {
+template<typename T>
+class PropertyNotification {
 public:
-    virtual 
+    virtual void OnPropertiyChanged(const T& props) = 0;
+};
+
+template<typename T>
+class CommandNotification {
+public:
+    virtual void OnCommandComplete(s);
+
 };
 
 #endif
