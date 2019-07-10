@@ -21,45 +21,11 @@ typedef uint64_t uint64;
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <functional>
 
 using std::shared_ptr;
 using std::vector;
 using std::string;
-
-template<typename ...Args>
-class CommmandBase {
-protected:
-    static const int arg_size = sizeof...(Args);
-public:
-    virtual void Bind(const Args &...arguments) = 0;
-    virtual void Exec() = 0;
-};
-
-template<typename T>
-class NotificationImpl {
-public:
-    void AddNotification(const shared_ptr<T>&& notification) throw() {
-        notifications.push_back(notification);
-    }
-    void Clear() throw() {
-        notifications.clear();
-    }
-
-protected:
-    vector<shared_ptr<T>> notifications;
-};
-
-template<typename T>
-class PropertyNotification {
-public:
-    virtual void OnPropertiyChanged(const T& props) = 0;
-};
-
-template<typename T>
-class CommandNotification {
-public:
-    virtual void OnCommandComplete();
-
-};
+using std::function;
 
 #endif
