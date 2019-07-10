@@ -1,9 +1,8 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <QVector>
 #include "common/common.h"
-#include "common/etl.h"
+#include "common/middleware.h"
 #include "parser/channel.h"
 #include "parser/item.h"
 #include "parser/iobject.h"
@@ -13,7 +12,7 @@
 
 using Channels = shared_ptr<QVector<shared_ptr<Channel>>>;
 
-class Model: public ProxyPropertyNotification<Model> {
+class Model: public Middleware<Model>{
 public:
     Model();
     ~Model();
@@ -21,6 +20,12 @@ public:
     void UpdateChannel(QString title);
     void AddChannel(QString url);
     void DeleteChannel(QString title);
+public 
+slots:
+    virtual void UpStreamReciever(const QString&) override;
+    virtual void DownStreamReciever(const QString&) override;
+signals:
+    void SIG_CHANNEL_CHANGE(const QString&);
 private:
     Channels chans;
     QMap<QString, int>           chanTable;

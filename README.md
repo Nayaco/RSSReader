@@ -8,11 +8,11 @@
     
     - [ ] wheel requester
 
-    - [ ] xml parser
+    - [x] http requester
 
-    - [ ] subscribed differ
+    - [x] xml parser
 
-    - [ ] sort 
+    - [ ] subscribed differ 
 
 - [ ] image parser
 

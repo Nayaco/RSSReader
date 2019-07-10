@@ -14,6 +14,7 @@ typedef uint64_t uint64;
 #elif defined(__unix__) || defined(__APPLE__)
 typedef uint64_t uint64;
 #include <unistd.h>
+
 #endif
 #include <string>
 #include <vector>
@@ -22,6 +23,10 @@ typedef uint64_t uint64;
 #include <map>
 #include <unordered_map>
 #include <functional>
+
+#include <QVector>
+#include <QString>
+#include <QMap>
 
 using std::shared_ptr;
 using std::vector;

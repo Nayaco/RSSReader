@@ -19,7 +19,7 @@ void Model::UpdateChannel(QString title) {
             parser->SetDoc(xml.toStdString());
             auto newChan = parser->Parse();
             chans->value(id)->DeepCopy(*newChan);
-            TriggerNotification("Channel");
+            // TriggerNotification("Channel");
         }
     });
 }
@@ -31,21 +31,21 @@ void Model::AddChannel(QString url) {
             chans->push_back(newChan);
             chanTable[QString::fromStdString(newChan->GetTitle())] = chans->size() - 1;
             // auto chansr = newChan;
-            for(auto i : *chans) {
-                qDebug()<<QString::fromStdString(i->GetTitle());
-                qDebug()<<QString::fromStdString(i->GetLink());
-                qDebug()<<QString::fromStdString(i->GetDesc());
-                qDebug()<<i->GetTTL();
-                auto &items = i->GetItems();
-                for(auto j: items) {
-                    qDebug()<<"--item--";
-                    qDebug()<<QString::fromStdString(j->GetTitle());
-                    qDebug()<<QString::fromStdString(j->GetLink());
-                    qDebug()<<QString::fromStdString(j->GetDesc());
-                    qDebug()<<"--------";
-                }
-            }
-            TriggerNotification("Channel");
+            // for(auto i : *chans) {
+            //     qDebug()<<QString::fromStdString(i->GetTitle());
+            //     qDebug()<<QString::fromStdString(i->GetLink());
+            //     qDebug()<<QString::fromStdString(i->GetDesc());
+            //     qDebug()<<i->GetTTL();
+            //     auto &items = i->GetItems();
+            //     for(auto j: items) {
+            //         qDebug()<<"--item--";
+            //         qDebug()<<QString::fromStdString(j->GetTitle());
+            //         qDebug()<<QString::fromStdString(j->GetLink());
+            //         qDebug()<<QString::fromStdString(j->GetDesc());
+            //         qDebug()<<"--------";
+            //     }
+            // }
+            // TriggerNotification("Channel");
         }
     });
 }
@@ -57,5 +57,5 @@ void Model::DeleteChannel(QString title) {
     chanTable[ltitle] = id;
     chans->value(id)->DeepCopy(*(chans->value(lid)));
     chans->pop_back();
-    TriggerNotification("Channel");
+    // TriggerNotification("Channel");
 }
