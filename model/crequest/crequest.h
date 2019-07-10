@@ -8,7 +8,7 @@ class CRequest : public Request {
 public:
     CRequest();
     ~CRequest();
-    void GetChannel(QString url, function<void(bool, QString)> cb;
+    void GetChannel(QString url, function<void(bool, QString)> cb);
 protected:
     virtual void OnFinished(QNetworkReply *reply, const QByteArray data, const int statusCode) override;
 private:

@@ -2,3 +2,4 @@
 .qmake.stash
 Makefile
 bin
+*.o

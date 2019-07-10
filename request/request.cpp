@@ -2,7 +2,7 @@
 
 Request::Request() {
     qDebug() << "BaseAPI";
-    QObject::connect(&networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(serviceRequestFinished(QNetworkReply*)));
+    QObject::connect(&networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(RequestFinished(QNetworkReply*)));
 }
 
 Request::~Request() {

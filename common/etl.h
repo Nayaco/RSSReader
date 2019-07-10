@@ -36,6 +36,7 @@ public:
 
 template<typename T = int>
 class ProxyPropertyNotification: public NotificationImpl<PropertyNotification> {
+public:
     void AddPropertyNotification(const shared_ptr<PropertyNotification>& p) {
         AddNotification(p);
     } 
@@ -48,6 +49,7 @@ class ProxyPropertyNotification: public NotificationImpl<PropertyNotification> {
 
 template<typename T = int>
 class ProxyCommandNotification: public NotificationImpl<CommandNotification> {
+public:
     void AddCommandNotification(const shared_ptr<CommandNotification>& p) {
         AddNotification(p);
     } 

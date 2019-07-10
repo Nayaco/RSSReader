@@ -7,20 +7,24 @@
 #include "parser/channel.h"
 #include "parser/item.h"
 #include "parser/iobject.h"
+#include "parser/RSSparser.h"
 
 #include "crequest/crequest.h"
+
+using Channels = shared_ptr<QVector<shared_ptr<Channel>>>;
 
 class Model: public ProxyPropertyNotification<Model> {
 public:
     Model();
     ~Model();
-    shared_ptr<QVector<Channel>> GetChannels();
-    void UpdateChannel();
+    Channels GetChannels();
+    void UpdateChannel(QString title);
     void AddChannel(QString url);
-    void DeleteChannel(string name);
+    void DeleteChannel(QString title);
 private:
-    shared_ptr<QVector<Channel>> chan;
-    map<string, int>             chanTable;
-    shared_ptr<CRequest>         request;
+    Channels chans;
+    QMap<QString, int>           chanTable;
+    shared_ptr<CRequest>         crequest;
+    shared_ptr<RSSParser>        parser;
 };
 #endif
