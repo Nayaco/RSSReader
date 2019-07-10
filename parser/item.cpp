@@ -3,7 +3,7 @@
 Item::Item()
     : title(""), description(""), link("") { }
 
-Item::Item(const Item&& _item)
+Item::Item(const Item& _item)
     : title(_item.title), description(_item.description), link(_item.link) { }
 
 void Item::DeepCopy(const Item& _item) {

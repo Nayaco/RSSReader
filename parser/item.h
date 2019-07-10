@@ -7,8 +7,7 @@
 class Item: public IObject {
 public:
 Item();
-Item(const Item& _item) = delete;
-Item(const Item&& _item);
+Item(const Item& _item);
 ~Item()=default;
 
 string GetTitle();

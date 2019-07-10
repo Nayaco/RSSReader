@@ -27,5 +27,6 @@ using std::shared_ptr;
 using std::vector;
 using std::string;
 using std::function;
+using std::map;
 
 #endif

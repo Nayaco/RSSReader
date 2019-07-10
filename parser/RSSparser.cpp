@@ -74,9 +74,17 @@ shared_ptr<Channel> RSSParser::Parse() {
     res->SetLink(string(currentElement->GetText()));
     changeName("description");
     res->SetDesc(string(currentElement->GetText()));
-    
+    auto oldElement = currentElement;
+    changeName("ttl");
+    if(currentElement) {
+        string ttl = currentElement->GetText();
+        res->setTTL(std::stoi(ttl));
+    } else {
+        res->setTTL(30);
+        currentElement = oldElement;
+    }
+
     changeName("item");
-    
     for(;currentElement;next())
         res->AddItem(getItem());
     return res;

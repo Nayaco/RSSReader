@@ -1,6 +1,6 @@
-#include "channel.h"
-#include "item.h"
-#include "RSSparser.h"
+#include "parser/channel.h"
+#include "parser/item.h"
+#include "parser/RSSparser.h"
 #include <iostream>
 using namespace std;
 int main(int argc, char const *argv[])
@@ -56,6 +56,7 @@ int main(int argc, char const *argv[])
     cout<<chan->GetTitle()<<endl;
     cout<<chan->GetLink()<<endl;
     cout<<chan->GetDesc()<<endl;
+    cout<<chan->GetTTL()<<endl;
     auto &items = chan->GetItems();
     for(auto i: items) {
         cout<<"--item--"<<endl;

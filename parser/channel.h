@@ -8,8 +8,7 @@
 class Channel: public IObject {
 public:
 Channel();
-Channel(const Channel& chan) = delete;
-Channel(const Channel&& chan);
+Channel(const Channel& chan);
 ~Channel()=default;
 
 string GetTitle();
@@ -18,6 +17,10 @@ string GetDesc();
 void SetDesc(const string& str);
 string GetLink();
 void SetLink(const string& str);
+int GetTTL();
+void setTTL(const int _ttl);
+
+
 vector<shared_ptr<Item>>& GetItems();
 void AddItem(const shared_ptr<Item>& _item);
 void ClearItem();
@@ -28,6 +31,7 @@ private:
 string description;
 string title;
 string link;
+int    ttl;
 vector<shared_ptr<Item>> items;
 
 virtual string get(const string& key) override;
