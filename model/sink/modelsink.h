@@ -4,7 +4,8 @@
 #include "common/middleware.h"
 #include "../model.h"
 
-class ModelSink : public Middleware<ModelSink>{
+class ModelSink : public Middleware{
+    Q_OBJECT
 public:
     ModelSink() = default;
     ~ModelSink() = default;
@@ -24,10 +25,7 @@ slots:
     virtual void DownStreamReciever(
         const QString& _data, const QString& msg, const QString& target) override;
 signals:
-    // expose to viewmodel 
-    // void SIG_PROPS_CHANGED(
-    //     const QString& _data, const QString& msg, const QString& target);
-    
+
     void SIG_CHANNEL_UPDATE(const QString&);
     void SIG_CHANNEL_ADD(const QString&);
     void SIG_CHANNEL_DELETE(const QString&);

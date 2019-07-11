@@ -25,6 +25,7 @@ typedef uint64_t uint64;
 #include <functional>
 
 #include <QVector>
+#include <QObject>
 #include <QString>
 #include <QMap>
 

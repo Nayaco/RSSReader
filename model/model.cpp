@@ -10,7 +10,8 @@ Model::~Model() { }
 // shared_ptr<Channels> Model::GetChannels() { return chans; }
 
 void Model::UpdateChannel(const QString& title) {
-    if(chans.find(title) == chans.end()) emit(SIG_CHANNEL_FAILED("miss"));
+    if(chans.find(title) == chans.end()) 
+        emit SIG_CHANNEL_FAILED("miss");
     auto url = chans[title]->GetLink();
     crequest->GetChannel(url, [&](bool success, QString xml) {
         if(success) {
@@ -28,6 +29,8 @@ void Model::AddChannel(const QString& url) {
         if(success) {
             parser->SetDoc(xml);
             auto newChan = parser->Parse();
+            if(chans.find(newChan->GetTitle()) != chans.end()) 
+                emit SIG_CHANNEL_FAILED("exist");
             chans[newChan->GetTitle()] = newChan;
             emit SIG_CHANNEL_CHANGE("cadd");
         } else {
@@ -37,7 +40,8 @@ void Model::AddChannel(const QString& url) {
 }
 void Model::DeleteChannel(const QString& title) {
     auto iter = chans.find(title);
-    if(iter == chans.end()) emit(SIG_CHANNEL_FAILED("miss"));
+    if(iter == chans.end()) 
+        emit SIG_CHANNEL_FAILED("miss");
     chans.erase(iter);
     emit SIG_CHANNEL_CHANGE("cdelete");
 }
@@ -49,6 +53,18 @@ void Model::DownStreamReciever(const QString& msg) {
     emit SIG_OMIT(msg);
 }
 
-shared_ptr<QVector<Property>> Get(const QString&) {
-    
+shared_ptr<QVector<PropertyInstance>> Model::Get(const QVector<QString>& _target) {
+    auto res = std::make_shared<QVector<PropertyInstance>>();
+    for(auto iter : _target) {
+        res->push_back(std::static_pointer_cast<Property>(chans[iter]));
+    }
+    return res;
+}
+
+shared_ptr<QVector<QString>>  Model::GetMeta() {
+    auto res = std::make_shared<QVector<QString>>();
+    for(auto iter =  chans.keyBegin(); iter != chans.keyEnd(); ++iter) {
+        res->push_back(*iter);
+    }
+    return res;
 }

@@ -7,7 +7,8 @@
 #include "model/sink/modelsink.h"
 #include "common/property.h"
 
-class ViewModel : public Middleware<ViewModel> {
+class ViewModel : public Middleware {
+    Q_OBJECT
 public:
     ViewModel() = default;
     ~ViewModel() = default;

@@ -12,13 +12,14 @@
 
 using ChannelInstance = shared_ptr<Channel>;
 
-class Model: public Middleware<Model>{
+class Model: public Middleware{
+    Q_OBJECT
 public:
     Model();
     ~Model();
-    shared_ptr<QVector<Property>> Get(const QString&);
-
-public 
+    shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&);
+    shared_ptr<QVector<QString>>  GetMeta();
+public
 slots:
     void UpdateChannel(const QString& title);
     void AddChannel(const QString& url);

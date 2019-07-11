@@ -1,24 +1,34 @@
 #include <QApplication>
 #include "model/model.h"
-#include "model/sink/modelsink.h"
-
-class QTT: public QObject {
-Q_OBJECT
-public:
-    QTT() = default;
-    ~QTT() = default;
-public 
-slots:
-void finished();
-};
-void QTT::finished() {
-    
+#include "testModel.h"
+void QTT::finished(const QString& _ans) {
+    auto meta = model->GetMeta();
+    for(auto i: *meta) {
+        qDebug()<<i;
+    }
+    auto data = model->Get(*meta);
+    for(auto i: *data) {
+        auto q = std::dynamic_pointer_cast<Channel>(i);
+        qDebug()<<q->GetTitle();
+        qDebug()<<q->GetLink();
+        qDebug()<<q->GetDesc();
+        qDebug()<<q->GetTTL();
+        auto items = q->GetItems();
+        for(auto j: *items) {
+            qDebug()<<"--item--";
+            qDebug()<<j->GetTitle();
+            qDebug()<<j->GetLink();
+            qDebug()<<j->GetDesc();
+            qDebug()<<"--------";
+        }
+    }
 }
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    auto model = std::make_shared<Model>();
-    model->AddChannel("https://rsshub.app/bilibili/ranking/0/3?limit=10");
+    auto qtt = std::make_shared<QTT>();
+    qtt->start();
+    
     // model->AddPropertyNotification();
     
     // auto chans = model->GetChannels();

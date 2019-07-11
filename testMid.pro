@@ -8,7 +8,7 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = bin/testModel
+TARGET = bin/testMid
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,28 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++17
 
 SOURCES += \
-        tests/testModel.cpp\
-        parser/channel.cpp\
-        parser/item.cpp\
-        parser/RSSparser.cpp\
-        request/request.cpp\
-        model/model.cpp\
-        model/crequest/crequest.cpp\
-        externalLib/tinyxml2.cpp
+        tests/testMiddleware.cpp
 
 HEADERS += \
-        tests/testModel.h\
-        parser/channel.h\
-        parser/item.h\
-        parser/RSSparser.h\
-        request/request.h\
-        model/model.h\
-        model/crequest/crequest.h\
-        externalLib/tinyxml2.h\
-        common/common.h\
-        common/middleware.h\
-        common/property.h
-
+        tests/testMiddleware.h
 FORMS += \
 
 # Default rules for deployment.

@@ -1,8 +1,7 @@
 #pragma once
 
-#include <QObject>
+#include "common.h"
 
-template<class T>
 class Middleware : public QObject {
     Q_OBJECT
 public:
