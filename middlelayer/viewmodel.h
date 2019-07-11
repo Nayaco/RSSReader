@@ -31,6 +31,7 @@ void SIG_CMD(
 
 private:
     shared_ptr<Model> model;
+    QMap<QString, bool> unsync;
 };
 
 #endif

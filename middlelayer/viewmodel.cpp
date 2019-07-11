@@ -12,9 +12,11 @@ void ViewModel::BindModel(shared_ptr<ModelSink> modelsink) {
 void ViewModel::ModelUpStreamReiever(
     const QString& _data, const QString& msg, const QString& target) {
     if(target == "ok") {
+        unsync[_data] = true;
         emit SIG_PROPS_CHANGED(_data, msg, target);
     } 
     else if(target == "failed") {
+        unsync[_data] = false;
         emit SIG_CMD_FAIL(_data, msg, target);
     }
 }
@@ -24,5 +26,6 @@ void ViewModel::ModelDownStreamReciever(
 }
 
 shared_ptr<Channels> ViewModel::GetChannel() {
+    unsync["channel"] = false;
     return model->GetChannels();
 }
