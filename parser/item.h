@@ -2,13 +2,14 @@
 #define ITEM_H
 
 #include "common/common.h"
-#include "iobject.h"
+#include "common/property.h"
 
-class Item: public IObject {
+class Item: public Property {
 public:
 Item();
 ~Item()=default;
 Item(const Item& _item) = delete;
+virtual QString Name() override { return "item"; }
 
 QString GetTitle();
 void SetTitle(const QString& str);

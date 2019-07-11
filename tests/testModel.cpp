@@ -1,5 +1,19 @@
 #include <QApplication>
 #include "model/model.h"
+#include "model/sink/modelsink.h"
+
+class QTT: public QObject {
+Q_OBJECT
+public:
+    QTT() = default;
+    ~QTT() = default;
+public 
+slots:
+void finished();
+};
+void QTT::finished() {
+    
+}
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

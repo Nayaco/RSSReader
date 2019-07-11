@@ -18,17 +18,17 @@ void ModelSink::BindModel(shared_ptr<Model> _model) {
 
 void ModelSink::ModelUpStreamReciever(const QString& msg) {
     if(msg == "cadd") {
-        emit SIG_PROPS_CHANGED("channel" , "add", "ok");
+        emit SIG_TRI("channel" , "add", "ok");
     }
     else if(msg == "cupdate") {
-        emit SIG_PROPS_CHANGED("channel" , "update", "ok");
+        emit SIG_TRI("channel" , "update", "ok");
     }
     else if(msg == "cdelete") {
-        emit SIG_PROPS_CHANGED("channel" , "delete", "ok");
+        emit SIG_TRI("channel" , "delete", "ok");
     }
 }
 
-void ModelSink::ModelDownStreamReciever(
+void ModelSink::DownStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
     if(_data == "channel") {
         if(msg == "add") {

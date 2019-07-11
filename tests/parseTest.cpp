@@ -1,10 +1,13 @@
+#include <QApplication>
+#include <QDebug>
 #include "parser/channel.h"
 #include "parser/item.h"
 #include "parser/RSSparser.h"
-#include <iostream>
+
 using namespace std;
 int main(int argc, char const *argv[])
 {
+    
     static const char* xml =
     "<?xml version=\"1.0\" encoding=\"utf-8\" ?>"
     "<rss>"
@@ -53,17 +56,17 @@ int main(int argc, char const *argv[])
     RSSParser parser;
     parser.SetDoc(xml);
     auto chan = parser.Parse();
-    cout<<chan->GetTitle()<<endl;
-    cout<<chan->GetLink()<<endl;
-    cout<<chan->GetDesc()<<endl;
-    cout<<chan->GetTTL()<<endl;
-    auto &items = chan->GetItems();
-    for(auto i: items) {
-        cout<<"--item--"<<endl;
-        cout<<i->GetTitle()<<endl;
-        cout<<i->GetLink()<<endl;
-        cout<<i->GetDesc()<<endl;
-        cout<<"--------"<<endl;
+    qDebug()<<chan->GetTitle();
+    qDebug()<<chan->GetLink();
+    qDebug()<<chan->GetDesc();
+    qDebug()<<chan->GetTTL();
+    auto items = chan->GetItems();
+    for(auto i: *items) {
+        qDebug()<<"--item--";
+        qDebug()<<i->GetTitle();
+        qDebug()<<i->GetLink();
+        qDebug()<<i->GetDesc();
+        qDebug()<<"--------";
     }
     return 0;
 }

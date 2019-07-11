@@ -2,16 +2,19 @@
 #define CHANNEL_H
 
 #include "common/common.h"
-#include "iobject.h"
+#include "common/property.h"
 #include "item.h"
 
 using Items = vector<shared_ptr<Item>>;
 
-class Channel: public IObject {
+class Channel: public Property {
 public:
 Channel();
 ~Channel()=default;
 Channel(const Channel& chan) = delete;
+
+virtual QString Name() override { return "channel"; }
+
 
 QString GetTitle();
 void SetTitle(const QString& str);
@@ -21,7 +24,6 @@ QString GetLink();
 void SetLink(const QString& str);
 int GetTTL();
 void setTTL(const int _ttl);
-
 
 shared_ptr<Items> GetItems();
 void AddItem(const shared_ptr<Item>& _item);

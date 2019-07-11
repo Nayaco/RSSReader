@@ -5,20 +5,21 @@
 #include "common/middleware.h"
 #include "model/model.h"
 #include "model/sink/modelsink.h"
+#include "common/property.h"
 
 class ViewModel : public Middleware<ViewModel> {
 public:
     ViewModel() = default;
     ~ViewModel() = default;
-    void BindModel(shared_ptr<ModelSink>);
+    void BindModel(shared_ptr<Middleware>);
     // void BindView(shared_ptr<View>, shared_ptr<ViewSink>);
-    shared_ptr<Channels> GetChannel();
+    // shared_ptr<> Get();
 public
 slots:
-virtual void ModelUpStreamReiever(
-    const QString& _data, const QString& msg, const QString& target);
-virtual void ModelDownStreamReciever(
-    const QString& _data, const QString& msg, const QString& target);
+virtual void UpStreamReciever(
+    const QString& _data, const QString& msg, const QString& target) override;
+virtual void DownStreamReciever(
+    const QString& _data, const QString& msg, const QString& target) override;
 signals:
 
 void SIG_PROPS_CHANGED(
@@ -30,7 +31,7 @@ void SIG_CMD(
     const QString& _data, const QString& msg, const QString& target);
 
 private:
-    shared_ptr<Model> model;
+    QMap<QString, shared_ptr<Middleware>> models;
     QMap<QString, bool> unsync;
 };
 
