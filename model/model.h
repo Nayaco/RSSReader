@@ -20,9 +20,9 @@ public:
 
 public 
 slots:
-    void UpdateChannel(QString title);
-    void AddChannel(QString url);
-    void DeleteChannel(QString title);
+    void UpdateChannel(const QString& title);
+    void AddChannel(const QString& url);
+    void DeleteChannel(const QString& title);
     virtual void UpStreamReciever(const QString&) override;
     virtual void DownStreamReciever(const QString&) override;
 signals:

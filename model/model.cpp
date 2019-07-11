@@ -9,7 +9,7 @@ Model::~Model() { }
 
 shared_ptr<Channels> Model::GetChannels() { return chans; }
 
-void Model::UpdateChannel(QString title) {
+void Model::UpdateChannel(const QString& title) {
     auto id = chanTable[title];
     auto url = chans->value(id)->GetLink();
     crequest->GetChannel(url, [&](bool success, QString xml) {
@@ -23,7 +23,7 @@ void Model::UpdateChannel(QString title) {
         }
     });
 }
-void Model::AddChannel(QString url) {
+void Model::AddChannel(const QString& url) {
     crequest->GetChannel(url, [&](bool success, QString xml) {
         if(success) {
             parser->SetDoc(xml);
@@ -36,7 +36,7 @@ void Model::AddChannel(QString url) {
         }
     });
 }
-void Model::DeleteChannel(QString title) {
+void Model::DeleteChannel(const QString& title) {
     auto id = chanTable[title];
     auto lid = chans->size() - 1;
     auto ltitle = chans->value(lid)->GetTitle();

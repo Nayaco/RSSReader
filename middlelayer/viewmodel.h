@@ -4,25 +4,36 @@
 #include "common/common.h"
 #include "common/middleware.h"
 #include "model/model.h"
+#include "model/sink/modelsink.h"
 
 class ViewModel : public Middleware<ViewModel> {
 public:
-    ViewModel();
-    ~ViewModel();
-    void BindModel(shared_ptr<Model>);
+    ViewModel() = default;
+    ~ViewModel() = default;
+    void BindModel(shared_ptr<ModelSink>);
+    // void BindView(shared_ptr<View>, shared_ptr<ViewSink>);
 public
 slots:
-virtual void ChannelUpStreamFailureHandler(const QString&);
-virtual void UpStreamReciever(const QString&) override;
+virtual void ModelUpStreamFailureHandler(
+    const QString& _data, const QString& msg, const QString& target);
+virtual void ModelUpStreamReiever(
+    const QString& _data, const QString& msg, const QString& target);
 
-virtual void ChannelDownStreamReciever(const QString&, const QString&);
-virtual void DownStreamReciever(const QString&) override;
+virtual void ModelDownStreamReciever(
+    const QString& _data, const QString& msg, const QString& target);
 signals:
-void SIG_PROPS_CHANGED(const QString&);
-void SIG_CMD_CADD(const QString&);
-void SIG_CMD_CUPDATE(const QString&);
-void SIG_CMD_CDELETE(const QString&);
-void SIG_CMD_FAIL(const QString&);
+
+void SIG_PROPS_CHANGED(
+    const QString& _data, const QString& msg, const QString& target);
+
+void SIG_CMD_FAIL(
+    const QString& _data, const QString& msg, const QString& target);
+
+void SIG_CMD(
+    const QString& _data, const QString& msg, const QString& target);
+
+private:
+    shared_ptr<Model> model;
 };
 
 #endif

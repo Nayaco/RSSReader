@@ -13,4 +13,5 @@ slots:
     virtual void DownStreamReciever(const QString&) { }
 signals:
     void SIG_OMIT(const QString&);
+    void SIG_TEMPLATE(const QString&, const QString&, const QString&);
 };
