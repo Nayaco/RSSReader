@@ -5,37 +5,39 @@
 #include "iobject.h"
 #include "item.h"
 
+using Items = vector<shared_ptr<Item>>;
+
 class Channel: public IObject {
 public:
 Channel();
-Channel(const Channel& chan);
 ~Channel()=default;
+Channel(const Channel& chan) = delete;
 
-string GetTitle();
-void SetTitle(const string& str);
-string GetDesc();
-void SetDesc(const string& str);
-string GetLink();
-void SetLink(const string& str);
+QString GetTitle();
+void SetTitle(const QString& str);
+QString GetDesc();
+void SetDesc(const QString& str);
+QString GetLink();
+void SetLink(const QString& str);
 int GetTTL();
 void setTTL(const int _ttl);
 
 
-vector<shared_ptr<Item>>& GetItems();
+shared_ptr<Items> GetItems();
 void AddItem(const shared_ptr<Item>& _item);
 void ClearItem();
 
 void DeepCopy(const Channel& chan);
 
 private:
-string description;
-string title;
-string link;
-int    ttl;
-vector<shared_ptr<Item>> items;
+QString description;
+QString title;
+QString link;
+int     ttl;
+shared_ptr<Items> items;
 
-virtual string get(const string& key) override;
-virtual void set(const string& key, const string& element) override;
+virtual QString get(const QString& key) override;
+virtual void set(const QString& key, const QString& element) override;
 
 };
 

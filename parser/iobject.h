@@ -4,8 +4,8 @@
 
 class IObject {
 public:
-virtual string get(const string&) = 0;
-virtual void set(const string&, const string&) = 0;
+virtual QString get(const QString&) = 0;
+virtual void set(const QString&, const QString&) = 0;
 };
 
 #endif

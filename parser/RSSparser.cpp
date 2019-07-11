@@ -1,50 +1,40 @@
 #include "RSSparser.h"
-RSSParser::RSSParser(const string& _data) {
-    doc.Parse(_data.c_str());
-    handle = new tinyxml2::XMLHandle(doc);
-    currentElement = handle->FirstChildElement("rss").ToElement();
-}
 
-RSSParser::RSSParser(RSSParser&& parser) {
-    doc.DeepCopy(&(parser.doc));
-    handle = new tinyxml2::XMLHandle(doc);
-    currentElement = handle->FirstChildElement("rss").ToElement();
-}
 RSSParser::~RSSParser() {
     delete handle;
 }
 
-void RSSParser::SetDoc(const string& _data) {
-    doc.Parse(_data.c_str());
+bool RSSParser::SetDoc(const QString& _data) {
+    string stdString = _data.toStdString();
+    doc.Parse(stdString.c_str());
     handle = new tinyxml2::XMLHandle(doc);
     currentElement = handle->FirstChildElement("rss").ToElement();
-}
-
-bool RSSParser::expect(const string& _element) {
-    if(currentElement->Name() != _element) {
-        return false;
-    }
+    if(!currentElement) return false;
     return true;
 }
 
 void RSSParser::next() {
     if(currentElement->NextSibling()) 
         currentElement = currentElement->NextSibling()->ToElement();
-    else 
+    else
         currentElement = nullptr;
 }
 
 
-bool RSSParser::changeName(const string& _element, const char* dir) {
+bool RSSParser::changeName(const QString& _element, const QString& dir) {
+    if(!currentElement->Parent()) return false;
     auto parent = currentElement->Parent()->ToElement();
-    if(strcmp(dir, "peer") == 0) {
-        currentElement = parent->FirstChildElement(_element.c_str());
+    if(dir == "peer") {
+        string stdString = _element.toStdString();
+        currentElement = parent->FirstChildElement(stdString.c_str());
         return true;
     }
-    else if(strcmp(dir, "child") == 0) {
-        currentElement = currentElement->FirstChildElement(_element.c_str());
+    else if(dir == "child") {
+        string stdString = _element.toStdString();
+        currentElement = currentElement->FirstChildElement(stdString.c_str());
         return true;
-    } else if(strcmp(dir, "parent") == 0) {
+    } 
+    else if("parent") {
         currentElement = parent;
         return true;
     }
@@ -54,11 +44,11 @@ bool RSSParser::changeName(const string& _element, const char* dir) {
 shared_ptr<Item> RSSParser::getItem() {
     auto res = std::make_shared<Item>();
     changeName("title", "child");
-    res->SetTitle(string(currentElement->GetText()));
+    res->SetTitle(QString(currentElement->GetText()));
     changeName("link");
-    res->SetLink(string(currentElement->GetText()));
+    res->SetLink(QString(currentElement->GetText()));
     changeName("description");
-    res->SetDesc(string(currentElement->GetText()));
+    res->SetDesc(QString(currentElement->GetText()));
     changeName("", "parent");
     return res;
 }
@@ -69,21 +59,21 @@ shared_ptr<Channel> RSSParser::Parse() {
     auto res = std::make_shared<Channel>();
     changeName("channel", "child");
     changeName("title", "child");
-    res->SetTitle(string(currentElement->GetText()));
+    res->SetTitle(QString(currentElement->GetText()));
     changeName("link");
-    res->SetLink(string(currentElement->GetText()));
+    res->SetLink(QString(currentElement->GetText()));
     changeName("description");
-    res->SetDesc(string(currentElement->GetText()));
+    res->SetDesc(QString(currentElement->GetText()));
     auto oldElement = currentElement;
     changeName("ttl");
     if(currentElement) {
-        string ttl = currentElement->GetText();
-        res->setTTL(std::stoi(ttl));
+        QString ttl = QString(currentElement->GetText());
+        res->setTTL(ttl.toInt());
     } else {
         res->setTTL(30);
         currentElement = oldElement;
     }
-
+    
     changeName("item");
     for(;currentElement;next())
         res->AddItem(getItem());

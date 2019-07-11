@@ -7,8 +7,10 @@ class Middleware : public QObject {
     Q_OBJECT
 public 
 slots:
-    virtual void UpStreamReciever(const QString&) = 0;
-    virtual void DownStreamReciever(const QString&) = 0;
+// from lower layer to higher layer
+    virtual void UpStreamReciever(const QString&) { } 
+// from higher layer to lower layer
+    virtual void DownStreamReciever(const QString&) { }
 signals:
     void SIG_OMIT(const QString&);
 };

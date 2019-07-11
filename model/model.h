@@ -10,24 +10,26 @@
 
 #include "crequest/crequest.h"
 
-using Channels = shared_ptr<QVector<shared_ptr<Channel>>>;
+using Channels = QVector<shared_ptr<Channel>>;
 
 class Model: public Middleware<Model>{
 public:
     Model();
     ~Model();
-    Channels GetChannels();
+    shared_ptr<Channels> GetChannels();
+
+public 
+slots:
     void UpdateChannel(QString title);
     void AddChannel(QString url);
     void DeleteChannel(QString title);
-public 
-slots:
     virtual void UpStreamReciever(const QString&) override;
     virtual void DownStreamReciever(const QString&) override;
 signals:
     void SIG_CHANNEL_CHANGE(const QString&);
+    void SIG_CHANNEL_FAILED(const QString&);
 private:
-    Channels chans;
+    shared_ptr<Channels>         chans;
     QMap<QString, int>           chanTable;
     shared_ptr<CRequest>         crequest;
     shared_ptr<RSSParser>        parser;

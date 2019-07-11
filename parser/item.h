@@ -7,24 +7,24 @@
 class Item: public IObject {
 public:
 Item();
-Item(const Item& _item);
 ~Item()=default;
+Item(const Item& _item) = delete;
 
-string GetTitle();
-void SetTitle(const string& str);
-string GetDesc();
-void SetDesc(const string& str);
-string GetLink();
-void SetLink(const string& str);
+QString GetTitle();
+void SetTitle(const QString& str);
+QString GetDesc();
+void SetDesc(const QString& str);
+QString GetLink();
+void SetLink(const QString& str);
 
 void DeepCopy(const Item& _item);
 
 private:
-string description;
-string title;
-string link;
-virtual string get(const string& key) override;
-virtual void set(const string& key, const string& element) override;
+QString description;
+QString title;
+QString link;
+virtual QString get(const QString& key) override;
+virtual void set(const QString& key, const QString& element) override;
 
 };
 
