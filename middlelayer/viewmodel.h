@@ -12,20 +12,17 @@ public:
     ~ViewModel() = default;
     void BindModel(shared_ptr<ModelSink>);
     // void BindView(shared_ptr<View>, shared_ptr<ViewSink>);
+    shared_ptr<Channels> GetChannel();
 public
 slots:
-virtual void ModelUpStreamFailureHandler(
-    const QString& _data, const QString& msg, const QString& target);
 virtual void ModelUpStreamReiever(
     const QString& _data, const QString& msg, const QString& target);
-
 virtual void ModelDownStreamReciever(
     const QString& _data, const QString& msg, const QString& target);
 signals:
 
 void SIG_PROPS_CHANGED(
     const QString& _data, const QString& msg, const QString& target);
-
 void SIG_CMD_FAIL(
     const QString& _data, const QString& msg, const QString& target);
 

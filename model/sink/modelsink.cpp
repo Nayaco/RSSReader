@@ -28,15 +28,6 @@ void ModelSink::ModelUpStreamReciever(const QString& msg) {
     }
 }
 
-void ModelSink::ModelUpStreamErrorReciever(const QString& msg) {
-    if(msg == "cadd") {
-        emit SIG_PROPS_CHANGED("channel" , "add", "ok");
-    }
-    else if(msg == "cupdate") {
-        emit SIG_PROPS_CHANGED("channel" , "update", "ok");
-    }
-}
-
 void ModelSink::ModelDownStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
     if(_data == "channel") {

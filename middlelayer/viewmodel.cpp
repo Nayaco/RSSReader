@@ -3,36 +3,26 @@
 
 void ViewModel::BindModel(shared_ptr<ModelSink> modelsink) {
     model = modelsink->GetModel();
-    connect(modelsink, SIGNAL(SIG_PROPS_CHANGED), this, );
+    connect(modelsink.get(), SIGNAL(SIG_PROPS_CHANGED(const QString&, const QString&, const QString&)),
+        this, SLOT(ModelUpStreamReiever(const QString&, const QString&, const QString&)));
+    connect(this, SIGNAL(SIG_CMD(const QString&, const QString&, const QString&)),
+        modelsink.get(), SLOT(ModelDownStreamReciever(const QString&, const QString&, const QString&)));
 }
 
-// void ViewModel::UpStreamReciever(const QString& msg) {
-//     if(msg == "cupdate" || msg == "cadd" || msg == "cdelete") {
-//         PropsUnsync["channel"] = false;
-//         emit SIG_PROPS_CHANGED("channel");
-//     }
-// }
-// void ViewModel::DownStreamReciever(const QString& msg) {
-// }
+void ViewModel::ModelUpStreamReiever(
+    const QString& _data, const QString& msg, const QString& target) {
+    if(target == "ok") {
+        emit SIG_PROPS_CHANGED(_data, msg, target);
+    } 
+    else if(target == "failed") {
+        emit SIG_CMD_FAIL(_data, msg, target);
+    }
+}
+void ViewModel::ModelDownStreamReciever(
+    const QString& _data, const QString& msg, const QString& target) {
+    emit SIG_CMD(_data, msg, target);
+}
 
-// void ViewModel::ChannelUpStreamFailureHandler(const QString& msg) {
-//     if(msg == "cadd" || msg == "cupdate") {
-//         PropsUnsync["channel"] = false;
-//         emit SIG_CMD_FAIL("channel");
-//     }
-// } 
-
-// void ViewModel::ChannelDownStreamReciever(const QString& msg, const QString& _data) {
-//     if(msg == "cadd") {
-//         PropsUnsync["channel"] = true;
-//         emit SIG_CMD_CADD("cadd");
-//     }
-//     else if(msg == "cupdate") {
-//         PropsUnsync["channel"] = true;
-//         emit SIG_CMD_CUPDATE("cupdate");
-//     }
-//     else if(msg == "cdelete") {
-//         PropsUnsync["channel"] = true;
-//         emit SIG_CMD_CDELETE("cdelete");
-//     }
-// }
+shared_ptr<Channels> ViewModel::GetChannel() {
+    return model->GetChannels();
+}
