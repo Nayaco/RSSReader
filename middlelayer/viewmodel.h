@@ -12,17 +12,18 @@ class ViewModel : public Middleware {
 public:
     ViewModel() = default;
     ~ViewModel() = default;
+    virtual QString Name() { return "viewmodel"; }
     void BindModel(shared_ptr<Middleware>);
-    // void BindView(shared_ptr<View>, shared_ptr<ViewSink>);
-    // shared_ptr<> Get();
+    virtual shared_ptr<QVector<PropertyInstance>> Get(const QString&, const QVector<QString>&) override;
+    virtual shared_ptr<QVector<QString>>  GetMeta(const QString&) override;
 public
 slots:
 virtual void UpStreamReciever(
     const QString& _data, const QString& msg, const QString& target) override;
 virtual void DownStreamReciever(
     const QString& _data, const QString& msg, const QString& target) override;
-signals:
 
+signals:
 void SIG_PROPS_CHANGED(
     const QString& _data, const QString& msg, const QString& target);
 void SIG_CMD_FAIL(
@@ -33,6 +34,7 @@ void SIG_CMD(
 
 private:
     QMap<QString, shared_ptr<Middleware>> models;
+    //dirty table (For Virtual DOM)
     QMap<QString, bool> unsync;
 };
 

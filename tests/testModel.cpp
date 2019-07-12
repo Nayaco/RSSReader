@@ -4,7 +4,8 @@
 void QTT::finished(const QString& _ans1, const QString& _ans2, const QString& _ans3) {
     qDebug()<<"--ttttttt--";
     auto _model = std::dynamic_pointer_cast<Model>(model->GetChild());
-    auto meta = _model->GetMeta();
+
+    auto meta = vm->GetMeta("channel");
     for(auto i: *meta) {
         qDebug()<<i;
     }
@@ -30,7 +31,8 @@ void QTT::finished(const QString& _ans1, const QString& _ans2, const QString& _a
         emit SIG_TEST("channel", "update", "bilibili 3日排行榜-动画-近期投稿");
     } else if(zero == 1) {
         zero = 2;
-        emit SIG_TEST("channel", "delete", "bilibili 3日排行榜-动画-近期投稿");
+        // emit SIG_TEST("channel", "delete", "bilibili 3日排行榜-动画-近期投稿");
+        ctimer->StartTik();
     }
 }
 int main(int argc, char *argv[])

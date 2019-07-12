@@ -18,8 +18,8 @@ public:
     Model();
     ~Model();
     virtual QString Name() override { return "CHANNEL"; }
-    shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&);
-    shared_ptr<QVector<QString>>  GetMeta();
+    virtual shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&) override;
+    virtual shared_ptr<QVector<QString>>  GetMeta() override;
 public
 slots:
     void UpdateChannel(const QString& title);
