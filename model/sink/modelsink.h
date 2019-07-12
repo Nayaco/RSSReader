@@ -25,7 +25,8 @@ slots:
     virtual void DownStreamReciever(
         const QString& _data, const QString& msg, const QString& target) override;
 signals:
-
+    void SIG_CHANNEL_INIT();
+    void SIG_CHANNEL_EXIT();
     void SIG_CHANNEL_UPDATE(const QString&);
     void SIG_CHANNEL_ADD(const QString&);
     void SIG_CHANNEL_DELETE(const QString&);

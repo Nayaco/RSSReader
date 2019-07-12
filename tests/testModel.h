@@ -33,13 +33,15 @@ public:
     shared_ptr<ViewModel> vm;
     shared_ptr<CTimer> ctimer;
     void start() {
-        emit SIG_TEST("channel", "add", "https://rsshub.app/bilibili/ranking/0/3?limit=5");
+        // emit SIG_TEST("channel", "add", "https://rsshub.app/bilibili/ranking/0/3?limit=5");
         // model->AddChannel("https://rsshub.app/bilibili/ranking/0/3?limit=5");
         // model->AddChannel("https://rsshub.app/kirara/news");
+        emit SIG_TEST("channel", "init", "");
     }
 public 
 slots:
 void finished(const QString&, const QString&, const QString&);
 signals:
 void SIG_TEST(const QString&, const QString&, const QString&);
+void SIG_QUIT();
 };
