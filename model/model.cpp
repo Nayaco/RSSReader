@@ -3,11 +3,16 @@
 Model::Model() {
     chans.clear();
     crequest = std::make_shared<CRequest>();
+    irequest = std::make_shared<IRequest>();
     parser = std::make_shared<RSSParser>();
+    connect(
+        this,
+        SIGNAL(SIG_IMG(const QString&)),
+        this,
+        SLOT(SetImg(const QString&)));
 }
 Model::~Model() { 
 }
-
 
 void Model::UpdateChannel(const QString& title) {
     if(chans.find(title) == chans.end()) {
@@ -15,28 +20,26 @@ void Model::UpdateChannel(const QString& title) {
         return;
     }
     QString url = chans[title]->GetSource();
-    crequest->GetChannel(url, [=](bool success, QString xml, QString _url) {
+    crequest->GetChannel(url, [&](bool success, QString xml, QString _url) {
         if(success) {
             parser->SetDoc(xml);
             newChan = parser->Parse();
-            chans[title]->DeepCopy(*newChan);
-
-            emit SIG_CHANNEL_CHANGE("cupdate");
+            newItems = newChan->GetItems();
+            icounter = 0;
+            emit SIG_IMG("cupdate");
         } else {
             emit SIG_CHANNEL_FAILED("cupdate");
         }
     });
 }
 void Model::AddChannel(const QString& url) {
-    crequest->GetChannel(url, [=](bool success, QString xml, QString _url) {
+    crequest->GetChannel(url, [&](bool success, QString xml, QString _url) {
         if(success) {
             parser->SetDoc(xml);
             newChan = parser->Parse();
-            if(chans.find(newChan->GetTitle()) != chans.end()) 
-                emit SIG_CHANNEL_FAILED("exist");
-            newChan->SetSource(url);
-            chans[newChan->GetTitle()] = newChan;
-            emit SIG_CHANNEL_CHANGE("cadd");
+            newItems = newChan->GetItems();
+            icounter = 0;
+            emit SIG_IMG("cadd");
         } else {
             emit SIG_CHANNEL_FAILED("cadd");
         }
@@ -73,24 +76,36 @@ shared_ptr<QVector<QString>>  Model::GetMeta() {
     return res;
 }
 
-void Model::SetImg(const QString& title) {
-    
+void Model::SetImg(const QString& act) {
+    if(icounter == newItems->size()) {
+        
+        if(act == "cadd")
+            chans[newChan->GetTitle()] = newChan;
+        else if(act == "cupdate")
+            chans[newChan->GetTitle()]->DeepCopy(*newChan);
+        emit SIG_CHANNEL_CHANGE(act);
+        return;
+    }
     QRegExp regexp("<img(.+)>");
-    
-
-    // irequest->GetImg(url, [=](bool success, QString xml, QString _url) {
-    //     if(success) {
-    //         parser->SetDoc(xml);
-    //         newChan = parser->Parse();
-    //         if(chans.find(newChan->GetTitle()) != chans.end()) 
-    //             emit SIG_CHANNEL_FAILED("exist");
-    //         newChan->SetSource(url);
-    //         chans[newChan->GetTitle()] = newChan;
-    //         emit SIG_CHANNEL_CHANGE("cadd");
-    //     } else {
-    //         emit SIG_CHANNEL_FAILED("cadd");
-    //     }
-    // });
+    QRegExp regexp2("src=\"(.+)\"");
+    QRegExp regexp3("<(.*)>");
+    regexp.setMinimal(true);
+    regexp2.setMinimal(true);
+    regexp.indexIn(newItems->value(icounter)->GetDesc());
+    regexp2.indexIn(regexp.cap(1));
+    QString url = regexp2.cap(1);
+    QString newDesc = newItems->value(icounter)->GetDesc().replace(regexp3, "");
+    newItems->value(icounter)->SetDesc(newDesc);
+    int count = icounter;
+    irequest->GetImg(url, [=](bool success, QPixmap img, QString _url) {
+        if(success) {
+            newItems->value(count)->SetImg(img);
+            emit SIG_IMG(act);
+        } else {
+            emit SIG_CHANNEL_FAILED(act);
+        }
+    });
+    icounter++;
 }
 
 static QString RSSCACHE = "../.rsscache/channels.cache";

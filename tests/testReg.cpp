@@ -10,15 +10,20 @@
 int main(int argc, char *argv[])
 {
     QApplication ax(argc, argv);
-    QString str("<dadada> <https://dasdada.com/djadadada/dad>");
-    QRegExp regexp("<(.+)>");
-    
+    QString str("<dadada> <https://dasdada.com/djadadada/dad> <img src=\"qqq\">");
+    QRegExp regexp("<img(.+)>");
+    QRegExp regexp2("src=\"(.+)\"");
     regexp.setMinimal(true);
+    regexp2.setMinimal(true);
     int pos = 0;
-    qDebug()<<regexp.indexIn(str, pos);
+    int pos2 = 0;
     while((pos = regexp.indexIn(str, pos)) != -1) {
-        qDebug()<<regexp.cap(1)<< " | " << pos;
-        pos += regexp.matchedLength();    
+        QString ans = regexp.cap(1);
+        qDebug()<<ans<< " | " << pos;
+        pos += regexp.matchedLength(); 
+        regexp2.indexIn(ans, 0);
+        qDebug()<<regexp2.cap(1);
     }
+    qDebug()<<str.replace(regexp, "|||");
     return ax.exec();
 }

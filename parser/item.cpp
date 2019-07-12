@@ -27,3 +27,6 @@ QString Item::GetDesc() { return get("desc"); }
 void Item::SetDesc(const QString& str) { set("desc", str); }
 QString Item::GetLink() { return get("link"); }
 void Item::SetLink(const QString& str) { set("link", str); }
+
+QPixmap Item::GetImg() { return img; }
+void Item::SetImg(const QPixmap& _img) { img = _img; } 

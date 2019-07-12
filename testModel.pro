@@ -33,6 +33,7 @@ SOURCES += \
         model/model.cpp\
         model/sink/modelsink.cpp\
         model/crequest/crequest.cpp\
+        model/irequest/irequest.cpp\
         externalLib/tinyxml2.cpp\
         middlelayer/viewmodel.cpp\
         view/ctimer/ctimer.cpp
@@ -46,6 +47,7 @@ HEADERS += \
         model/model.h\
         model/sink/modelsink.h\
         model/crequest/crequest.h\
+        model/irequest/irequest.h\
         externalLib/tinyxml2.h\
         common/common.h\
         common/middleware.h\

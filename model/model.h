@@ -38,14 +38,16 @@ slots:
     virtual void UpStreamReciever(const QString&) override;
     virtual void DownStreamReciever(const QString&) override;
     
-    void SetImg(const QString& title);
+    void SetImg(const QString& act);
 signals:
     void SIG_CHANNEL_CHANGE(const QString&);
     void SIG_CHANNEL_FAILED(const QString&);
 
     void SIG_IMG(const QString&);
 private:
+    int                                 icounter;
     ChannelInstance                     newChan;
+    shared_ptr<Items>                   newItems;
     QMap<QString, ChannelInstance>      chans;
     shared_ptr<CRequest>                crequest;
     shared_ptr<IRequest>                irequest;
