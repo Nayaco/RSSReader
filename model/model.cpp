@@ -88,13 +88,17 @@ void Model::SetImg(const QString& act) {
     }
     QRegExp regexp("<img(.+)>");
     QRegExp regexp2("src=\"(.+)\"");
-    QRegExp regexp3("<(.*)>");
+    QRegExp regexp3("<(.+)>");
+    QRegExp regexp4("\\s{2,}");
     regexp.setMinimal(true);
     regexp2.setMinimal(true);
+    regexp3.setMinimal(true);
     regexp.indexIn(newItems->value(icounter)->GetDesc());
     regexp2.indexIn(regexp.cap(1));
     QString url = regexp2.cap(1);
-    QString newDesc = newItems->value(icounter)->GetDesc().replace(regexp3, "");
+    QString newDesc = newItems->value(icounter)->GetDesc().replace(regexp3, "  ");
+    newDesc.replace(regexp4, " ");
+    newDesc.replace("\n", ",");
     newItems->value(icounter)->SetDesc(newDesc);
     int count = icounter;
     irequest->GetImg(url, [=](bool success, QPixmap img, QString _url) {

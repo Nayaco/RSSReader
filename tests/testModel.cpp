@@ -10,22 +10,22 @@ void QTT::finished(const QString& _ans1, const QString& _ans2, const QString& _a
         qDebug()<<i;
     }
     qDebug()<<"--ttttttt--";
-    // auto data = _model->Get(*meta);
-    // for(auto i: *data) {
-    //     auto q = std::dynamic_pointer_cast<Channel>(i);
-    //     qDebug()<<q->GetTitle();
-    //     qDebug()<<q->GetLink();
-    //     qDebug()<<q->GetDesc();
-    //     qDebug()<<q->GetTTL();
-    //     auto items = q->GetItems();
-    //     for(auto j: *items) {
-    //         qDebug()<<"--item--";
-    //         qDebug()<<j->GetTitle();
-    //         qDebug()<<j->GetLink();
-    //         qDebug()<<j->GetDesc();
-    //         qDebug()<<"--------";
-    //     }
-    // }
+    auto data = _model->Get(*meta);
+    for(auto i: *data) {
+        auto q = std::dynamic_pointer_cast<Channel>(i);
+        qDebug()<<q->GetTitle();
+        qDebug()<<q->GetLink();
+        qDebug()<<q->GetDesc();
+        qDebug()<<q->GetTTL();
+        auto items = q->GetItems();
+        for(auto j: *items) {
+            qDebug()<<"--item--";
+            qDebug()<<j->GetTitle();
+            qDebug()<<j->GetLink();
+            qDebug()<<j->GetDesc();
+            qDebug()<<"--------";
+        }
+    }
     if(zero==0) {
         zero = 1;
         emit SIG_TEST("channel", "update", "Vol.moe");
