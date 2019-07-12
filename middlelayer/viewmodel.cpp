@@ -18,6 +18,15 @@ void ViewModel::BindModel(shared_ptr<Middleware> modelsink) {
 
 void ViewModel::UpStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
+    if(_data == "channel" && msg == "update") {
+        counter++;
+        global_counter++;
+        if(counter < meta->size())
+            emit SIG_CMD("channel", "update", meta->value(counter));
+        else
+            emit SIG_PROPS_CHANGED("channel", "update", "ok"); 
+        return;
+    }
     if(target == "ok") {
         unsync[_data] = true;
         emit SIG_PROPS_CHANGED(_data, msg, target);
@@ -29,6 +38,13 @@ void ViewModel::UpStreamReciever(
 }
 void ViewModel::DownStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
+    if(_data == "channel" && msg == "update") {
+        meta = models["channel"]->GetMeta();
+        counter = 0;
+        if(meta->size() > 0)
+            emit SIG_CMD("channel", "update", meta->value(counter));
+        return; 
+    }
     emit SIG_CMD(_data, msg, target);
 }
 

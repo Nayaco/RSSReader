@@ -11,7 +11,6 @@ class CTimer : public ViewSink {
 public:
     CTimer(int _interval) : ontiking(false), interval(_interval) {};
     ~CTimer() = default;
-    virtual void BindViewModel(const shared_ptr<ViewModel> _viewmodel);
     virtual void StartTik();
     virtual void StopTik();
 public slots:
@@ -21,12 +20,9 @@ virtual void UpStreamReciever(
     const QString& _data, const QString& msg, const QString& target)override;
 
 private:
-    shared_ptr<ViewModel> viewmodel;
     shared_ptr<QTimer> timer;
     bool ontiking; 
     int interval;
-    shared_ptr<QVector<QString>> meta;
-    int counter;
 };
 
 #endif

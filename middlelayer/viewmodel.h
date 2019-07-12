@@ -34,8 +34,13 @@ void SIG_CMD(
 
 private:
     QMap<QString, shared_ptr<Middleware>> models;
-    //dirty table (For Virtual DOM)
+    // dirty table (For Virtual DOM)
     QMap<QString, bool> unsync;
+
+    // for update bussiness logical
+    shared_ptr<QVector<QString>> meta;
+    int counter;
+    int global_counter;
 };
 
 #endif
