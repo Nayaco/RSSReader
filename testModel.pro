@@ -31,6 +31,7 @@ SOURCES += \
         parser/RSSparser.cpp\
         request/request.cpp\
         model/model.cpp\
+        model/sink/modelsink.cpp\
         model/crequest/crequest.cpp\
         externalLib/tinyxml2.cpp
 
@@ -41,6 +42,7 @@ HEADERS += \
         parser/RSSparser.h\
         request/request.h\
         model/model.h\
+        model/sink/modelsink.h\
         model/crequest/crequest.h\
         externalLib/tinyxml2.h\
         common/common.h\

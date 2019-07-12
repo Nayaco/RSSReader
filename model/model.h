@@ -17,6 +17,7 @@ class Model: public Middleware{
 public:
     Model();
     ~Model();
+    virtual QString Name() override { return "CHANNEL"; }
     shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&);
     shared_ptr<QVector<QString>>  GetMeta();
 public

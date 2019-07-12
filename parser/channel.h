@@ -25,6 +25,9 @@ void SetLink(const QString& str);
 int GetTTL();
 void setTTL(const int _ttl);
 
+QString GetSource();
+void SetSource(const QString& str);
+
 shared_ptr<Items> GetItems();
 void AddItem(const shared_ptr<Item>& _item);
 void ClearItem();
@@ -35,6 +38,7 @@ private:
 QString description;
 QString title;
 QString link;
+QString csource;
 int     ttl;
 shared_ptr<Items> items;
 

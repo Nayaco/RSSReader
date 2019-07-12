@@ -1,19 +1,23 @@
 #include "modelsink.h"
 
-void ModelSink::BindModel(shared_ptr<Model> _model) {
-    connect(_model.get(), SIGNAL(SIG_CHANNEL_CHANGE(const QString&)), 
-        this, SLOT(void ModelUpStreamReciever(const QString&)));
-    connect(_model.get(), SIGNAL(SIG_CHANNEL_FAILED(const QString&)),
-        this, SLOT(void ModelUpStreamErrorReciever(const QString&)));
+void ModelSink::BindModel() {
+    model = std::make_shared<Model>();
+    Model* ptr_model = model.get();
+    connect(ptr_model, SIGNAL(SIG_CHANNEL_CHANGE(const QString&)), 
+        this, SLOT(ModelUpStreamReciever(const QString&)));
+    connect(ptr_model, SIGNAL(SIG_CHANNEL_FAILED(const QString&)),
+        this, SLOT(ModelUpStreamErrorReciever(const QString&)));
 
     connect(this, SIGNAL(SIG_CHANNEL_ADD(const QString&)), 
-        _model.get(), SIGNAL(AddChannel(const QString&)));
+        ptr_model, SLOT(AddChannel(const QString&)));
     connect(this, SIGNAL(SIG_CHANNEL_UPDATE(const QString&)), 
-        _model.get(), SIGNAL(UpdateChannel(const QString&)));
+        ptr_model, SLOT(UpdateChannel(const QString&)));
     connect(this, SIGNAL(SIG_CHANNEL_DELETE(const QString&)), 
-        _model.get(), SIGNAL(DeleteChannel(const QString&)));
+        ptr_model, SLOT(DeleteChannel(const QString&)));
+}
 
-    model = _model;
+void ModelSink::ModelUpStreamErrorReciever(const QString& msg) {
+    emit SIG_BI("error", msg);
 }
 
 void ModelSink::ModelUpStreamReciever(const QString& msg) {

@@ -1,6 +1,5 @@
 #include "viewmodel.h"
 
-
 void ViewModel::BindModel(shared_ptr<Middleware> modelsink) {
     QString name = modelsink->Name();
     models[name] = modelsink->GetChild();

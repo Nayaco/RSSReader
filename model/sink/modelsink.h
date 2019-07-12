@@ -9,12 +9,12 @@ class ModelSink : public Middleware{
 public:
     ModelSink() = default;
     ~ModelSink() = default;
-    void BindModel(shared_ptr<Model>);
+    void BindModel();
     virtual shared_ptr<Middleware> GetChild() override 
         { 
             return std::static_pointer_cast<Middleware>(model); 
         }
-    virtual QString Name() override { return name; }
+    virtual QString Name() override { return "channel"; }
 public
 slots:
     virtual void ModelUpStreamReciever(
@@ -31,7 +31,6 @@ signals:
     void SIG_CHANNEL_DELETE(const QString&);
 private:
     shared_ptr<Model> model;
-    const QString name = "channel";
 };
 
 #endif
