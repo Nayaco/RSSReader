@@ -39,7 +39,7 @@ public:
 private:
     virtual QString get(const QString& key) override;
     virtual void set(const QString& key, const QString& element) override;
-
+    
 private:
     QString description;
     QString title;

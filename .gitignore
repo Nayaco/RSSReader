@@ -6,4 +6,4 @@ bin
 moc_*
 RSSReader.pro.user
 build
-
+.rsscache
