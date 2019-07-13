@@ -28,7 +28,7 @@ void ViewModel::UpStreamReciever(
         if(counter < meta->size())
             emit SIG_CMD("channel", "update", meta->value(counter));
         else
-            emit SIG_PROPS_CHANGED("channel", "update", "ok"); 
+            emit SIG_TRI("channel", "update", "ok"); 
         return;
     }
     if(_data == "channel" && msg == "init") {
@@ -41,7 +41,7 @@ void ViewModel::UpStreamReciever(
     }
     if(target == "ok") {
         unsync[_data] = true;
-        emit SIG_PROPS_CHANGED(_data, msg, target);
+        emit SIG_TRI(_data, msg, target);
     }
     else if(target == "failed") {
         unsync[_data] = false;
