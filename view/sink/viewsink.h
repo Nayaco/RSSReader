@@ -26,7 +26,6 @@ public:
             this,
             SLOT(UpStreamReciever(const QString&, const QString&, const QString&)));
     }
-    
 public
 slots:
 virtual void UpStreamReciever(
