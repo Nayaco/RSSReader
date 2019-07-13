@@ -24,23 +24,33 @@ class Model: public Middleware{
 public:
     Model();
     ~Model();
+
     virtual QString Name() override { return "CHANNEL"; }
+
     virtual shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&) override;
+
     virtual shared_ptr<QVector<QString>>  GetMeta() override;
 public
 slots:
     virtual void Init() ;
+
     virtual void Exit() ;
 
     void AddChannel(const QString& url);
+
     void UpdateChannel(const QString& title);
+
     void DeleteChannel(const QString& title);
+
     virtual void UpStreamReciever(const QString&) override;
+
     virtual void DownStreamReciever(const QString&) override;
     
     void SetImg(const QString& act);
+    
 signals:
     void SIG_CHANNEL_CHANGE(const QString&);
+
     void SIG_CHANNEL_FAILED(const QString&);
 
     void SIG_IMG(const QString&);

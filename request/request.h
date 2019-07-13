@@ -9,8 +9,11 @@ class Request : public QObject
 public:
     Request();
     ~Request();
+
     void get(const QString url);
+
     void post(const QString url, const QByteArray &data);
+    
 protected:
     virtual void OnFinished(QNetworkReply *reply, const QByteArray data, const int statusCode) = 0;
 

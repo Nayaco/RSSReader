@@ -3,8 +3,6 @@
 #include <QObject>
 #include <QDebug>
 
-
-
 void Counter::setValue(int value)
 {
     if (value != m_value) {
