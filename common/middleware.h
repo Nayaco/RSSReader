@@ -10,11 +10,11 @@ public:
     
     virtual shared_ptr<Middleware> GetChild() { return nullptr; }
 
-    virtual shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&) { return nullptr; }
     virtual shared_ptr<QVector<QString>>  GetMeta() { return nullptr; }
+    virtual shared_ptr<QVector<PropertyInstance>> Get(const QVector<QString>&) { return nullptr; }
 
-    virtual shared_ptr<QVector<PropertyInstance>> Get(const QString&, const QVector<QString>&) { return nullptr; }
     virtual shared_ptr<QVector<QString>>  GetMeta(const QString&) { return nullptr; }
+    virtual shared_ptr<QVector<PropertyInstance>> Get(const QString&, const QVector<QString>&) { return nullptr; }
 public 
 slots:
 // from lower layer to higher layer

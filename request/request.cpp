@@ -25,7 +25,7 @@ void Request::RequestFinished(QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
-    qDebug() << "Request...Finished...StatusCode:" << statusCode;
+    qDebug()<<reply->url()<<"Request...Finished...StatusCode:"<<statusCode;
 
     if(reply->error() == QNetworkReply::NoError) {
         OnFinished(reply, reply->readAll(), statusCode);

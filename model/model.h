@@ -9,7 +9,14 @@
 #include "parser/item.h"
 #include "parser/RSSparser.h"
 #include "crequest/crequest.h"
+#include "irequest/irequest.h"
 
+#include <QFile> 
+#include <QTextStream>
+#include <QStringList>
+#include <QRegExp>
+#include <QCoreApplication>
+#include <QDir>
 using ChannelInstance = shared_ptr<Channel>;
 
 class Model: public Middleware{
@@ -22,17 +29,29 @@ public:
     virtual shared_ptr<QVector<QString>>  GetMeta() override;
 public
 slots:
-    void UpdateChannel(const QString& title);
+    virtual void Init() ;
+    virtual void Exit() ;
+
     void AddChannel(const QString& url);
+    void UpdateChannel(const QString& title);
     void DeleteChannel(const QString& title);
     virtual void UpStreamReciever(const QString&) override;
     virtual void DownStreamReciever(const QString&) override;
+    
+    void SetImg(const QString& act);
 signals:
     void SIG_CHANNEL_CHANGE(const QString&);
     void SIG_CHANNEL_FAILED(const QString&);
+
+    void SIG_IMG(const QString&);
 private:
+    int                                 icounter;
+    int                                 busy;
+    ChannelInstance                     newChan;
+    shared_ptr<Items>                   newItems;
     QMap<QString, ChannelInstance>      chans;
     shared_ptr<CRequest>                crequest;
+    shared_ptr<IRequest>                irequest;
     shared_ptr<RSSParser>               parser;
 };
 #endif

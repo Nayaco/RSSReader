@@ -4,7 +4,11 @@
 #
 #-------------------------------------------------
 
+<<<<<<< HEAD
 QT += core gui designer uitools
+=======
+QT       += core gui network
+>>>>>>> Backend
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,9 +33,22 @@ SOURCES += \
         app/details/detail_dialog.cpp \
         app/loading/loading.cpp \
         app/main.cpp \
-        app/mainwindow.cpp
+        view/mainwindow/mainwindow.cpp\
+        view/mainwindow/mainwindowsink.cpp\
+        view/ctimer/ctimer.cpp\
+        parser/channel.cpp\
+        parser/item.cpp\
+        parser/RSSparser.cpp\
+        request/request.cpp\
+        model/model.cpp\
+        model/sink/modelsink.cpp\
+        model/crequest/crequest.cpp\
+        model/irequest/irequest.cpp\
+        externalLib/tinyxml2.cpp\
+        middlelayer/viewmodel.cpp
 
 HEADERS += \
+<<<<<<< HEAD
         app/articles/articles.h \
         app/articles/articletype.h \
         app/details/detail_dialog.h \
@@ -41,6 +58,29 @@ HEADERS += \
 FORMS += \
         app/details/detail_dialog.ui \
         app/mainwindow.ui
+=======
+        app/main.h\
+        common/common.h\
+        common/middleware.h\
+        common/property.h\
+        view/mainwindow/mainwindow.h\
+        view/mainwindow/mainwindowsink.h\
+        view/sink/viewsink.h\
+        view/ctimer/ctimer.h\
+        parser/channel.h\
+        parser/item.h\
+        parser/RSSparser.h\
+        request/request.h\
+        model/model.h\
+        model/sink/modelsink.h\
+        model/crequest/crequest.h\
+        model/irequest/irequest.h\
+        externalLib/tinyxml2.h\
+        middlelayer/viewmodel.h
+        
+FORMS += \
+        view/mainwindow/mainwindow.ui
+>>>>>>> Backend
 
 RESOURCES += app/qdarkstyle/style.qrc
 

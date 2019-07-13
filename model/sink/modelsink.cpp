@@ -14,6 +14,11 @@ void ModelSink::BindModel() {
         ptr_model, SLOT(UpdateChannel(const QString&)));
     connect(this, SIGNAL(SIG_CHANNEL_DELETE(const QString&)), 
         ptr_model, SLOT(DeleteChannel(const QString&)));
+    
+    connect(this, SIGNAL(SIG_CHANNEL_INIT()), 
+        ptr_model, SLOT(Init()));
+    connect(this, SIGNAL(SIG_CHANNEL_EXIT()), 
+        ptr_model, SLOT(Exit()));
 }
 
 void ModelSink::ModelUpStreamErrorReciever(const QString& msg) {
@@ -30,6 +35,12 @@ void ModelSink::ModelUpStreamReciever(const QString& msg) {
     else if(msg == "cdelete") {
         emit SIG_TRI("channel" , "delete", "ok");
     }
+    else if(msg == "cinit") {
+        emit SIG_TRI("channel" , "init", "ok");
+    } 
+    else if(msg == "cexit") {
+        emit SIG_TRI("channel", "exit", "ok");
+    }
 }
 
 void ModelSink::DownStreamReciever(
@@ -43,6 +54,12 @@ void ModelSink::DownStreamReciever(
         }
         else if(msg == "delete") {
             emit SIG_CHANNEL_DELETE(target);
+        }
+        else if(msg == "init") {
+            emit SIG_CHANNEL_INIT();
+        }
+        else if(msg == "exit") {
+            emit SIG_CHANNEL_EXIT();
         }
     }
 }

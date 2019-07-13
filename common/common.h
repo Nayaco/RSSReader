@@ -28,6 +28,7 @@ typedef uint64_t uint64;
 #include <QObject>
 #include <QString>
 #include <QMap>
+#include <QPixmap>
 
 using std::shared_ptr;
 using std::vector;

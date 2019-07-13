@@ -1,10 +1,11 @@
 #include "ctimer.h"
-
+#include <QDebug>
 void CTimer::StartTik() {
     timer = std::make_shared<QTimer>(this);
     connect(timer.get(), SIGNAL(timeout()), this, SLOT(TimeOutReciever()));
     ontiking = true;
     timer->start(interval * 1000);
+    qDebug()<<"tiking";
 }
 
 void CTimer::StopTik() {

@@ -5,7 +5,7 @@
 #include "common/property.h"
 #include "item.h"
 
-using Items = vector<shared_ptr<Item>>;
+using Items = QVector<shared_ptr<Item>>;
 
 class Channel: public Property {
 public:
