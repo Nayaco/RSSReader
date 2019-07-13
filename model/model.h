@@ -46,6 +46,7 @@ signals:
     void SIG_IMG(const QString&);
 private:
     int                                 icounter;
+    int                                 busy;
     ChannelInstance                     newChan;
     shared_ptr<Items>                   newItems;
     QMap<QString, ChannelInstance>      chans;

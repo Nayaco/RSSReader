@@ -4,7 +4,6 @@
 #include "common/common.h"
 #include "common/middleware.h"
 #include "common/property.h"
-#include "middlelayer/viewmodel.h"
 #include <QWidget>
 
 class ViewSink : public Middleware {
@@ -14,7 +13,7 @@ public:
     ~ViewSink() = default;
     virtual QString Name() { return "view"; }
     virtual void BindWidget(const QWidget& ) {}
-    virtual void BindViewModel (const shared_ptr<ViewModel> _viewmodel) {
+    virtual void BindViewModel (const shared_ptr<Middleware> _viewmodel) {
         viewmodel = _viewmodel;
         connect(
             this, 
@@ -35,7 +34,7 @@ virtual void UpStreamReciever(
 virtual void DownStreamReciever(
     const QString& _data, const QString& msg, const QString& target)override { };
 protected:
-    shared_ptr<ViewModel> viewmodel;
+    shared_ptr<Middleware> viewmodel;
 };
 
 #endif

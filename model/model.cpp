@@ -1,6 +1,7 @@
 #include "model.h"
 
 Model::Model() {
+    busy = 0;
     chans.clear();
     crequest = std::make_shared<CRequest>();
     irequest = std::make_shared<IRequest>();
@@ -19,6 +20,10 @@ void Model::UpdateChannel(const QString& title) {
         emit SIG_CHANNEL_FAILED("miss");
         return;
     }
+    if(!busy) 
+        busy = 1;
+    else 
+        emit SIG_CHANNEL_FAILED("busy");
     QString url = chans[title]->GetSource();
     crequest->GetChannel(url, [&](bool success, QString xml, QString _url) {
         if(success) {
@@ -28,11 +33,16 @@ void Model::UpdateChannel(const QString& title) {
             icounter = 0;
             emit SIG_IMG("cupdate");
         } else {
+            busy = 0;
             emit SIG_CHANNEL_FAILED("cupdate");
         }
     });
 }
 void Model::AddChannel(const QString& url) {
+    if(!busy) 
+        busy = 1;
+    else 
+        emit SIG_CHANNEL_FAILED("busy");
     crequest->GetChannel(url, [&](bool success, QString xml, QString _url) {
         if(success) {
             parser->SetDoc(xml);
@@ -41,6 +51,7 @@ void Model::AddChannel(const QString& url) {
             icounter = 0;
             emit SIG_IMG("cadd");
         } else {
+            busy = 0;
             emit SIG_CHANNEL_FAILED("cadd");
         }
     });
@@ -78,7 +89,7 @@ shared_ptr<QVector<QString>>  Model::GetMeta() {
 
 void Model::SetImg(const QString& act) {
     if(icounter == newItems->size()) {
-        
+        busy = 0;
         if(act == "cadd")
             chans[newChan->GetTitle()] = newChan;
         else if(act == "cupdate")
@@ -106,6 +117,7 @@ void Model::SetImg(const QString& act) {
             newItems->value(count)->SetImg(img);
             emit SIG_IMG(act);
         } else {
+            busy = 0;
             emit SIG_CHANNEL_FAILED(act);
         }
     });

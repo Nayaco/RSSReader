@@ -3,8 +3,6 @@
 
 #include "common/common.h"
 #include "common/middleware.h"
-#include "model/model.h"
-#include "model/sink/modelsink.h"
 #include "common/property.h"
 
 class ViewModel : public Middleware {
