@@ -1,5 +1,7 @@
 #ifndef RSSReaderDetail
 #define RSSReaderDetail
+#include <QDesktopServices>
+#include <QUrl>
 #include <QDebug>
 #include "detail_dialog.h"
 #include "ui_detail_dialog.h"
@@ -25,6 +27,8 @@ void Detail_Dialog::setContent(const ArticleData& content) {
 }
 
 void Detail_Dialog::slotOpeninBrowser() {
+    QDesktopServices::openUrl(QUrl("http://www.baidu.com"));
+
     qDebug() << "[Open in Browser] ...";
 }
 
