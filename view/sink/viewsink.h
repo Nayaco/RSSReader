@@ -32,10 +32,10 @@ public:
 public
 slots:
 virtual void UpStreamReciever(
-    const QString& _data, const QString& msg, const QString& target)override { };
+    const QString& _data, const QString& msg, const QString& target) override { }
     
 virtual void DownStreamReciever(
-    const QString& _data, const QString& msg, const QString& target)override { };
+    const QString& _data, const QString& msg, const QString& target) override { }
 protected:
     shared_ptr<Middleware> viewmodel;
 };

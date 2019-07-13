@@ -3,6 +3,7 @@
 
 #include "common/common.h"
 #include "common/property.h"
+#include "../app/articles/articletype.h"
 
 class Item: public Property {
 public:
@@ -25,6 +26,15 @@ public:
     void SetImg(const QPixmap& str);
 
     void DeepCopy(const Item& _item);
+
+    ArticleData GetArticle() {
+        ArticleData retval;
+        retval.img = img;
+        retval.link = link;
+        retval.title = title;
+        retval.description = description;
+        return retval;
+    }
 
 private:
     virtual QString get(const QString& key) override;

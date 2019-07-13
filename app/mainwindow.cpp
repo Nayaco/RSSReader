@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
 
     detail_window = new Detail_Dialog();
 
-
     subingurls = new QStandardItemModel(this);
     QStringList strList;
     for(int i = 0; i < 30; i++) {
@@ -40,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
     for(int i = 0; i < 20; i++) {
         QStandardItem* item = new QStandardItem;
         ArticleData curData;
-        curData.from = "string0";
+        curData.link = "string0";
         curData.title = "This is a title";
         curData.description = "This is a looooooooong description.";
         item->setData(QVariant::fromValue(curData), Qt::UserRole + 1);
@@ -63,7 +62,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::slotSubscription() {
     QString msg = ui->suburlinput->text();
-    qDebug() << "[debug info] " << msg;
+    qDebug() << "[subcription] " << msg;
 }
 
 void MainWindow::slotItemClicked(QModelIndex idx) {

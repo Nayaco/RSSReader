@@ -16,6 +16,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void SIG_CLOSE();
+
 public slots:
     void slotSubscription();
     void slotItemClicked(QModelIndex idx);

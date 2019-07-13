@@ -5,7 +5,7 @@
 #include "articles.h"
 #include "articletype.h"
 
-Articles::Articles(QObject *parent) : QStyledItemDelegate(parent) {
+Articles::Articles(QObject *parent) : QStyledItemDelegate(parent = nullptr) {
 
 }
 

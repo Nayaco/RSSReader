@@ -3,12 +3,13 @@
 
 #include <QMetaType>
 #include <QString>
+#include <QPixmap>
 
 typedef struct {
-    QString from;
-    QString image;
-    QString title;
     QString description;
+    QString title;
+    QString link;
+    QPixmap img;
 } ArticleData;
 
 Q_DECLARE_METATYPE(ArticleData)
