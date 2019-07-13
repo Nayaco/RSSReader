@@ -6,9 +6,7 @@
 #include <QFile>
 #include <QDir>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new Ui::MainWindow) {
     qDebug() << QDir::currentPath();
     QFile f(":qdarkstyle/style.qss");
     if (!f.exists()) {

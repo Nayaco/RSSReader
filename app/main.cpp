@@ -18,10 +18,12 @@ void RssReaderCore::UpStreamReciever(
     qDebug()<<"--ttttttt-- "<<zero<<"\n";
     
 }
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    RssReaderCore core;
-    core.init();
+
+    MainWindow w;
+    w.show();
+    // RssReaderCore core;
+    // core.init();
     return a.exec();
 }

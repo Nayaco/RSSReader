@@ -1,7 +1,7 @@
 #ifndef MAINWINDOWSINK_H
 #define MAINWINDOWSINK_H
 
-#include "mainwindow.h"
+#include "../app/mainwindow.h"
 #include "../sink/viewsink.h"
 class MainWindowSink : public ViewSink {
 Q_OBJECT
