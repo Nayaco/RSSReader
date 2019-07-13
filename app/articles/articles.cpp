@@ -33,13 +33,13 @@ void Articles::paint(QPainter *painter, const QStyleOptionViewItem &option, cons
         path.quadTo(rect.topRight(), rect.topRight());
 
         if (option.state.testFlag(QStyle::State_MouseOver)) {
-            painter->setPen(QPen(QColor("#ebeced")));
-            painter->setBrush(QColor("#ebeced"));
+//            painter->setPen(QPen(QColor("#ebeced")));
+//            painter->setBrush(QColor("#ebeced"));
             painter->drawPath(path);
         }
         if (option.state.testFlag(QStyle::State_Selected)) {
-            painter->setPen(QPen(QColor("#e3e3e5")));
-            painter->setBrush(QColor("#e3e3e5"));
+//            painter->setPen(QPen(QColor("#e3e3e5")));
+//            painter->setBrush(QColor("#e3e3e5"));
             painter->drawPath(path);
         }
 
@@ -47,10 +47,10 @@ void Articles::paint(QPainter *painter, const QStyleOptionViewItem &option, cons
         QRectF titleRect = QRect(iconRect.right() + 5, iconRect.top(), rect.width() - 10 - iconRect.width(), 20);
         QRectF descRect = QRect(titleRect.left(), titleRect.bottom() + 5, rect.width() - 10 - iconRect.width(), 20);
 
-        painter->setPen(QPen(Qt::black));
+        painter->setPen(QPen(Qt::white));
         painter->drawText(titleRect, curData.title);
 
-        painter->setPen(QPen(Qt::gray));
+        painter->setPen(QPen(Qt::red));
         painter->drawText(descRect, curData.description);
 
         painter->restore();

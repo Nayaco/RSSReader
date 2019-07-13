@@ -3,11 +3,23 @@
 #include "articles/articles.h"
 #include "articles/articletype.h"
 #include <QtDebug>
+#include <QFile>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow) {
+    qDebug() << QDir::currentPath();
+    QFile f(":qdarkstyle/style.qss");
+    if (!f.exists()) {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        this->setStyleSheet(ts.readAll());
+    }
+
     ui->setupUi(this);
 
     detail_window = new Detail_Dialog();

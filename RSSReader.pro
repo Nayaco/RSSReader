@@ -42,6 +42,8 @@ FORMS += \
         app/details/detail_dialog.ui \
         app/mainwindow.ui
 
+RESOURCES += app/qdarkstyle/style.qrc
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
