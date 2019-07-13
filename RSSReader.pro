@@ -27,6 +27,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         app/articles/articles.cpp \
         app/details/detail_dialog.cpp \
+        app/loading/loading.cpp \
         app/main.cpp \
         app/mainwindow.cpp
 
@@ -34,6 +35,7 @@ HEADERS += \
         app/articles/articles.h \
         app/articles/articletype.h \
         app/details/detail_dialog.h \
+        app/loading/loading.h \
         app/mainwindow.h
 
 FORMS += \
