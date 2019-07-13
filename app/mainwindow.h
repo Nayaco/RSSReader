@@ -1,21 +1,22 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QWidget>
+#include <QMainWindow>
 
-class QPushButton;
-class MainWindow : public QWidget {
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-signals:
-    void counterReached();
-public slots:
-    void slotButtonClicked(bool checked);
 private:
-    int m_counter;
-    QPushButton* m_button;
+    Ui::MainWindow *ui;
 };
 
-#endif // WINDOW_H
+#endif // MAINWINDOW_H
