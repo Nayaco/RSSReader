@@ -25,10 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #CONFIG += c++17
 
 SOURCES += \
+        app/articles.cpp \
         app/main.cpp \
         app/mainwindow.cpp
 
 HEADERS += \
+        app/articles.h \
+        app/articletype.h \
         app/mainwindow.h
 
 FORMS += \
