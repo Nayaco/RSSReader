@@ -5,3 +5,5 @@ bin
 *.o
 moc_*
 RSSReader.pro.user
+build
+
