@@ -12,5 +12,5 @@ before_install:
 
 install: true
 script: 
-  - qmake
+  - qmake RSSReader.pro
   - make --silent
