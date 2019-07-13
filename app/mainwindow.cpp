@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "articles.h"
+#include "articletype.h"
 #include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -20,6 +22,21 @@ MainWindow::MainWindow(QWidget *parent) :
         subingurls->appendRow(item);
     }
     ui->subinglist->setModel(subingurls);
+
+    articles = new QStandardItemModel(this);
+    for(int i = 0; i < 20; i++) {
+        QStandardItem* item = new QStandardItem;
+        ArticleData curData;
+        curData.from = "string0";
+        curData.title = "This is a title";
+        curData.description = "This is a looooooooong description.";
+        item->setData(QVariant::fromValue(curData), Qt::UserRole + 1);
+        articles->appendRow(item);
+    }
+
+    Articles* pArticles = new Articles(this);
+    ui->listView->setItemDelegate(pArticles);
+    ui->listView->setModel(articles);
 
     connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(subscription()));
     connect(ui->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(itemClicked(QModelIndex)));

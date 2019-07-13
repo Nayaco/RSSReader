@@ -26,15 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         app/articles.cpp \
+        app/details.cpp \
         app/main.cpp \
         app/mainwindow.cpp
 
 HEADERS += \
         app/articles.h \
         app/articletype.h \
+        app/details.h \
         app/mainwindow.h
 
 FORMS += \
+        app/details.ui \
         app/mainwindow.ui
 
 # Default rules for deployment.

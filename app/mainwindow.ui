@@ -83,6 +83,11 @@
           <height>424</height>
          </rect>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QListView" name="listView"/>
+         </item>
+        </layout>
        </widget>
       </widget>
      </widget>
