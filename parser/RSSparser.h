@@ -15,19 +15,23 @@ enum class ParserException {
 
 class RSSParser {
 public:
-RSSParser() = default;
-RSSParser(const RSSParser&) = delete;
-~RSSParser();
+    RSSParser() = default;
+    RSSParser(const RSSParser&) = delete;
+    ~RSSParser();
 
-bool SetDoc(const QString& _data);
-shared_ptr<Channel> Parse();
+    bool SetDoc(const QString& _data);
+    
+    shared_ptr<Channel> Parse();
 
 private:
 void next();
+
 bool changeName(
     const QString& _element, const QString& dir = "peer"); // peer or parent 
+
 shared_ptr<Item> getItem();
 
+private:
 tinyxml2::XMLDocument              doc;
 tinyxml2::XMLHandle*               handle;
 tinyxml2::XMLElement*              currentElement;

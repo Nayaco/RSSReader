@@ -4,18 +4,18 @@
 ## TODOS
 
 
-- [ ] xml requester
+- [x] xml requester
     
-    - [ ] wheel requester
+    - [x] polling
 
     - [x] http requester
 
-    - [x] xml parser
+    - [x] xml parser 
 
-    - [ ] subscribed differ 
+- [x] image parser
 
-- [ ] image parser
-
-- [ ] channel container
+- [x] channel container
 
 - [ ] notification
+
+- [x] UI

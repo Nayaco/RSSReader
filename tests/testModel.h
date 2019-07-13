@@ -19,7 +19,7 @@ public:
         ctimer->BindViewModel(std::static_pointer_cast<Middleware>(vm));
         connect(
             vm.get(), 
-            SIGNAL(SIG_PROPS_CHANGED(const QString&, const QString&, const QString&)), 
+            SIGNAL(SIG_TRI(const QString&, const QString&, const QString&)), 
             this, 
             SLOT(finished(const QString&, const QString&, const QString&)));
         connect(
