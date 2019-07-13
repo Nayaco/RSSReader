@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    detail_window = new Detail_Dialog();
+
     subingurls = new QStandardItemModel(this);
     QStringList strList;
     for(int i = 0; i < 30; i++) {
@@ -38,8 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setItemDelegate(pArticles);
     ui->listView->setModel(articles);
 
-    connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(subscription()));
-    connect(ui->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(itemClicked(QModelIndex)));
+    connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(slotSubscription()));
+    connect(ui->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(slotItemClicked(QModelIndex)));
+    connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotArticleClicked(QModelIndex)));
 }
 
 MainWindow::~MainWindow() {
@@ -54,4 +57,14 @@ void MainWindow::slotSubscription() {
 
 void MainWindow::slotItemClicked(QModelIndex idx) {
     qDebug() << "[click item] " << idx.data().toString();
+}
+
+void MainWindow::slotArticleClicked(QModelIndex idx) {
+    QVariant var = idx.data(Qt::UserRole + 1);
+    ArticleData curData = var.value<ArticleData>();
+
+    detail_window->setContent(curData);
+    detail_window->show();
+
+    qDebug() << "[click article] " << curData.title;
 }
