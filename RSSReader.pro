@@ -25,19 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #CONFIG += c++17
 
 SOURCES += \
-        app/articles.cpp \
-        app/detail_dialog.cpp \
+        app/articles/articles.cpp \
+        app/details/detail_dialog.cpp \
         app/main.cpp \
         app/mainwindow.cpp
 
 HEADERS += \
-        app/articles.h \
-        app/articletype.h \
-        app/detail_dialog.h \
+        app/articles/articles.h \
+        app/articles/articletype.h \
+        app/details/detail_dialog.h \
         app/mainwindow.h
 
 FORMS += \
-        app/detail_dialog.ui \
+        app/details/detail_dialog.ui \
         app/mainwindow.ui
 
 # Default rules for deployment.

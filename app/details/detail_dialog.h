@@ -2,7 +2,7 @@
 #define DETAIL_DIALOG_H
 
 #include <QDialog>
-#include "articletype.h"
+#include "../articles/articletype.h"
 
 namespace Ui {
 class Detail_Dialog;

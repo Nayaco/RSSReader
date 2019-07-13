@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "articles.h"
-#include "articletype.h"
+#include "articles/articles.h"
+#include "articles/articletype.h"
 #include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     detail_window = new Detail_Dialog();
+
 
     subingurls = new QStandardItemModel(this);
     QStringList strList;

@@ -3,7 +3,12 @@
 
 #include <QMainWindow>
 #include <QStandardItemModel>
-#include "detail_dialog.h"
+#include "details/detail_dialog.h"
+
+enum State {
+    loading,
+    running
+};
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +32,7 @@ private:
     QStandardItemModel* subingurls;
     QStandardItemModel* articles;
     Detail_Dialog* detail_window;
+    State curState;
 };
 
 #endif // MAINWINDOW_H
