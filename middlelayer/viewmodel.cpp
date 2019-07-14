@@ -1,5 +1,5 @@
 #include "viewmodel.h"
-
+#include <QDebug>
 void ViewModel::BindModel(shared_ptr<Middleware> modelsink) {
     QString name = modelsink->Name();
     models[name] = modelsink->GetChild();
@@ -18,6 +18,7 @@ void ViewModel::BindModel(shared_ptr<Middleware> modelsink) {
 
 void ViewModel::UpStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
+    qDebug() << _data << msg << target;
     if(_data == "channel" && msg == "update") {
         if(target == "failed") {
             emit SIG_CMD("channel", "update", meta->value(counter));
@@ -27,16 +28,25 @@ void ViewModel::UpStreamReciever(
         global_counter++;
         if(counter < meta->size())
             emit SIG_CMD("channel", "update", meta->value(counter));
-        else
-            emit SIG_TRI("channel", "update", "ok"); 
+        else {
+            if (init == false) {
+                emit SIG_TRI("channel", "update", "ok");
+            } else {
+                init = false;
+                emit SIG_TRI("channel", "init", "ok");
+            }
+        }
         return;
     }
     if(_data == "channel" && msg == "init") {
         meta = models["channel"]->GetMeta();
         counter = 0;
         global_counter++;
+        init = true;
         if(meta->size() > 0)
             emit SIG_CMD("channel", "update", meta->value(counter));
+        else 
+            emit SIG_TRI("channel", "init", "ok");
         return;
     }
     if(target == "ok") {

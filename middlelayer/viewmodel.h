@@ -46,6 +46,7 @@ private:
     shared_ptr<QVector<QString>> meta;
     int counter;
     int global_counter;
+    bool init;
 };
 
 #endif
