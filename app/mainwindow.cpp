@@ -21,7 +21,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
 
     ui->setupUi(this);
 
+    this->resize(QSize(1600, 800));
+
     detail_window = new Detail_Dialog();
+    detail_window->resize(QSize(800, 600));
 
     connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(slotSubscription()));
     connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotArticleClicked(QModelIndex)));
@@ -30,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
 MainWindow::~MainWindow() {
     delete ui;
     delete subingurls;
+    emit SIG_CLOSE();
 }
 
 void MainWindow::UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle) {
@@ -40,9 +44,9 @@ void MainWindow::UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle) {
         qDebug() << *iter << "\n";
         strList << *iter;
     }
-    for(int i = 0; i < 5; i++) {
-        strList << ("string" + QString::number(i));
-    }
+//    for(int i = 0; i < 5; i++) {
+//        strList << ("string" + QString::number(i));
+//    }
     int nCount = strList.size();
     for(int i = 0; i < nCount; i++) {
         QString string = static_cast<QString>(strList.at(i));
