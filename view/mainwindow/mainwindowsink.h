@@ -16,6 +16,7 @@ public
 slots:
     void OnMainWindowClose();
     void AddSubcription(const QString&);
+    void slotItemClicked(QModelIndex idx);
     virtual void UpStreamReciever(const QString&, const QString&, const QString&) override;
 signals:
 private:

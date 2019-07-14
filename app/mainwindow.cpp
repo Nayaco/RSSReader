@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
     detail_window = new Detail_Dialog();
 
     connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(slotSubscription()));
-    connect(ui->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(slotItemClicked(QModelIndex)));
     connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotArticleClicked(QModelIndex)));
 }
 
@@ -75,10 +74,6 @@ void MainWindow::UpdateRight(std::shared_ptr<QVector<PropertyInstance>> allartic
 void MainWindow::slotSubscription() {
     QString msg = ui->suburlinput->text();
     emit SIG_ADDSUB(msg);
-}
-
-void MainWindow::slotItemClicked(QModelIndex idx) {
-    qDebug() << "[click item] " << idx.data().toString();
 }
 
 void MainWindow::slotArticleClicked(QModelIndex idx) {

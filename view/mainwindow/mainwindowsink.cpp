@@ -1,4 +1,5 @@
 #include "mainwindowsink.h"
+#include "ui_mainwindow.h"
 #include <QDebug>
 #include <cassert>
 
@@ -8,6 +9,8 @@ MainWindowSink::MainWindowSink()  {
 
     connect(mainwindow.get(), SIGNAL(SIG_CLOSE()), this, SLOT(OnMainWindowClose()));
     connect(mainwindow.get(), SIGNAL(SIG_ADDSUB(const QString&)), this, SLOT(AddSubcription(const QString&)));
+
+    connect(mainwindow.get()->get_ui()->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(slotItemClicked(QModelIndex)));
 
     loadpage->show();
 }
@@ -20,6 +23,19 @@ void MainWindowSink::OnMainWindowClose() {
 void MainWindowSink::AddSubcription(const QString& url) {
     qDebug() << "[Add subscription] " << url;
     emit SIG_TRI("channel", "add", url);
+}
+
+void MainWindowSink::slotItemClicked(QModelIndex idx) {
+    static QString last_clicked = "";
+    QString title = idx.data().toString();
+    if(last_clicked == title) {
+        last_clicked = "";
+        UpdateArticle();
+    }
+    else {
+        last_clicked = title;
+        UpdateArticle(title);
+    }
 }
 
 void MainWindowSink::UpdateSub() {
