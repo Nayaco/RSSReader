@@ -6,11 +6,15 @@ Channel::Channel()
     }
 
 void Channel::DeepCopy(const Channel& chan) {
-    title = QString(chan.title);
-    description = QString(chan.description);
-    link = QString(chan.link);
+    title = chan.title;
+    description = chan.description;
+    link = chan.link;
     ttl  = chan.ttl;
-    items = chan.items;
+    for (auto i : *(chan.items)) {
+        if(!itemnames.contains(i->GetTitle())) {
+            AddItem(i);
+        }
+    }
 }
 
 QString Channel::get(const QString& key) {
@@ -41,7 +45,7 @@ void Channel::SetSource(const QString& str) { set("source", str); }
 
 
 shared_ptr<Items> Channel::GetItems() { return items; }
-void Channel::AddItem(const shared_ptr<Item>& _item) { items->push_back(_item); }
+void Channel::AddItem(const shared_ptr<Item>& _item) { items->push_back(_item); itemnames.insert(_item->GetTitle()); }
 void Channel::ClearItem() { items->clear(); }
 
 
