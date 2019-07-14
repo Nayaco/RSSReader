@@ -28,6 +28,7 @@ SOURCES += \
         app/articles/articles.cpp \
         app/details/detail_dialog.cpp \
         app/loading/loading.cpp \
+        app/loading/loading_page.cpp \
         app/mainwindow.cpp \
         app/main.cpp \
         view/mainwindow/mainwindowsink.cpp\
@@ -48,6 +49,7 @@ HEADERS += \
         app/articles/articletype.h \
         app/details/detail_dialog.h \
         app/loading/loading.h \
+        app/loading/loading_page.h \
         app/mainwindow.h \
         app/main.h \
         common/common.h \
@@ -69,6 +71,7 @@ HEADERS += \
 
 FORMS += \
         app/details/detail_dialog.ui \
+        app/loading/loading_page.ui \
         app/mainwindow.ui
 
 RESOURCES += app/qdarkstyle/style.qrc

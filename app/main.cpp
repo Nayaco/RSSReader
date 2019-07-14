@@ -21,9 +21,8 @@ void RssReaderCore::UpStreamReciever(
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
-    MainWindow w;
-    w.show();
-    // RssReaderCore core;
-    // core.init();
+    RssReaderCore core;
+    core.init();
+
     return a.exec();
 }

@@ -2,18 +2,20 @@
 #define MAINWINDOWSINK_H
 
 #include "../../app/mainwindow.h"
+#include "../../app/loading/loading_page.h"
 #include "../sink/viewsink.h"
 
 class MainWindowSink : public ViewSink {
 Q_OBJECT
 public:
     MainWindowSink() {
+        loadpage = std::make_shared<loading_page>();
         mainwindow = std::make_shared<MainWindow>();
 
         connect(mainwindow.get(), SIGNAL(SIG_CLOSE()), this, SLOT(OnMainWindowClose()));
 //        connect(mainwindow.get(), SIGNAL(SIG_ADDSUB(const QString&)), this, SLOT(AddSubcription(const QString&)));
 
-        mainwindow->show();
+        loadpage->show();
     }
     ~MainWindowSink() = default;
 public
@@ -25,6 +27,7 @@ slots:
 signals:
 private:
     shared_ptr<MainWindow> mainwindow;
+    shared_ptr<loading_page> loadpage;
 };
 
 #endif
