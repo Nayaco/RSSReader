@@ -5,6 +5,8 @@
 #include "articles.h"
 #include "articletype.h"
 
+#define HEIGHT 200
+
 Articles::Articles(QObject *parent) : QStyledItemDelegate(parent = nullptr) {
 
 }
@@ -43,15 +45,15 @@ void Articles::paint(QPainter *painter, const QStyleOptionViewItem &option, cons
             painter->drawPath(path);
         }
 
-        QRectF iconRect = QRect(rect.left() + 5, rect.top() + 5, 40, 40);
-        QRectF titleRect = QRect(iconRect.right() + 5, iconRect.top(), rect.width() - 10 - iconRect.width(), 20);
-        QRectF descRect = QRect(titleRect.left(), titleRect.bottom() + 5, rect.width() - 10 - iconRect.width(), 20);
+        QRectF iconRect = QRect(rect.left() + 5, rect.top() + 5, HEIGHT, HEIGHT);
+        QRectF titleRect = QRect(iconRect.right() + 5, iconRect.top(), rect.width() - 10 - iconRect.width(), HEIGHT / 2);
+        QRectF descRect = QRect(titleRect.left(), titleRect.bottom() + 5, rect.width() - 10 - iconRect.width(), HEIGHT / 2);
 
         painter->drawImage(iconRect, curData.img.toImage());
-        painter->setPen(QPen(Qt::white));
+        painter->setPen(QPen(QColor("#00ffff")));
         painter->drawText(titleRect, curData.title);
 
-        painter->setPen(QPen(Qt::red));
+        painter->setPen(QPen(Qt::white));
         painter->drawText(descRect, curData.description);
 
         painter->restore();
@@ -60,6 +62,6 @@ void Articles::paint(QPainter *painter, const QStyleOptionViewItem &option, cons
 
 QSize Articles::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const {
     Q_UNUSED(index)
-    return QSize(option.rect.width(), 100);
+    return QSize(option.rect.width(), HEIGHT + 10);
 }
 #endif
