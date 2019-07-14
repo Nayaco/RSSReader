@@ -74,7 +74,9 @@ FORMS += \
         app/loading/loading_page.ui \
         app/mainwindow.ui
 
-RESOURCES += app/qdarkstyle/style.qrc
+RESOURCES += \
+        app/qdarkstyle/style.qrc\
+        images/images.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

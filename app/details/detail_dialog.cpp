@@ -1,6 +1,7 @@
 #ifndef RSSReaderDetail
 #define RSSReaderDetail
 #include <QDesktopServices>
+#include <QLabel>
 #include <QUrl>
 #include <QDebug>
 #include <QFile>
@@ -34,7 +35,7 @@ void Detail_Dialog::setContent(const ArticleData& content) {
     this->content = content;
     ui->detail_title->setText(content.title);
     ui->content->setText(content.description);
-    ui->content->setWordWrap(true);
+    // ui->content->setWordWrap(true);
     ui->content->adjustSize();
     ui->content->setAlignment(Qt::AlignLeft);
     ui->content->setAlignment(Qt::AlignTop);

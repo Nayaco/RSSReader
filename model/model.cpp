@@ -111,7 +111,15 @@ void Model::SetImg(const QString& act) {
     regexp.setMinimal(true);
     regexp2.setMinimal(true);
     regexp3.setMinimal(true);
-    regexp.indexIn(newItems->value(icounter)->GetDesc());
+    int finded = regexp.indexIn(newItems->value(icounter)->GetDesc());
+    if(finded == -1) {
+        Q_INIT_RESOURCE(images);
+        QPixmap imgdefault(":/default_img.jpeg");
+        newItems->value(icounter)->SetImg(imgdefault);
+        icounter++;
+        emit SIG_IMG(act);
+        return;
+    }
     regexp2.indexIn(regexp.cap(1));
     QString url = regexp2.cap(1);
     QString newDesc = newItems->value(icounter)->GetDesc().replace(regexp3, "  ");

@@ -16,6 +16,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,7 +31,7 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout_3;
-    QLabel *content;
+    QTextBrowser *content;
     QHBoxLayout *horizontalLayout;
     QPushButton *broswer;
     QPushButton *closedetail;
@@ -51,17 +52,16 @@ public:
 
         scrollArea = new QScrollArea(Detail_Dialog);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scrollArea->setWidgetResizable(true);
+        scrollArea->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 520, 368));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        content = new QLabel(scrollAreaWidgetContents);
+        content = new QTextBrowser(scrollAreaWidgetContents);
         content->setObjectName(QString::fromUtf8("content"));
-        content->setTextFormat(Qt::PlainText);
-        content->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        content->setWordWrap(true);
 
         verticalLayout_3->addWidget(content);
 
@@ -97,7 +97,6 @@ public:
     {
         Detail_Dialog->setWindowTitle(QCoreApplication::translate("Detail_Dialog", "Dialog", nullptr));
         detail_title->setText(QCoreApplication::translate("Detail_Dialog", "Titleeeee", nullptr));
-        content->setText(QCoreApplication::translate("Detail_Dialog", "TextLabel", nullptr));
         broswer->setText(QCoreApplication::translate("Detail_Dialog", "Open in Browser", nullptr));
         closedetail->setText(QCoreApplication::translate("Detail_Dialog", "Close", nullptr));
     } // retranslateUi
