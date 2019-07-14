@@ -20,7 +20,7 @@ public:
     RssReaderCore() {
         model = std::make_shared<ModelSink>();
         vm = std::make_shared<ViewModel>();
-        ctimer = std::make_shared<CTimer>(5);
+        ctimer = std::make_shared<CTimer>(1800);
         mainwindow = std::make_shared<MainWindowSink>();
 
         model->BindModel();

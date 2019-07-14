@@ -56,7 +56,7 @@ void Loading::paintEvent(QPaintEvent *event) {
 
 void Loading::caculate() {
     _squareWidth = qMin(this->width(), this->height());
-    float half = _squareWidth / 2;
+    float half = _squareWidth / 4;
     _centerDistance = half - _maxDiameter / 2 - 1;
 
     float gap = (_maxDiameter - _minDiameter) / (_count - 1) / 2;

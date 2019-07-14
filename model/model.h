@@ -57,6 +57,7 @@ signals:
 private:
     int                                 icounter;
     int                                 busy;
+    QString                             iurl;
     ChannelInstance                     newChan;
     shared_ptr<Items>                   newItems;
     QMap<QString, ChannelInstance>      chans;

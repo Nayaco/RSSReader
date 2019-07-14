@@ -59,6 +59,9 @@ public:
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         content = new QLabel(scrollAreaWidgetContents);
         content->setObjectName(QString::fromUtf8("content"));
+        content->setTextFormat(Qt::PlainText);
+        content->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        content->setWordWrap(true);
 
         verticalLayout_3->addWidget(content);
 

@@ -4,7 +4,7 @@ void RssReaderCore::UpStreamReciever(
         const QString& data, const QString& msg, const QString& stat) {
     zero ++;
     // qDebug()<<data<<msg<<stat;
-    if(data == "channel" && msg == "update" && stat == "ok" && zero == 1) {    
+    if(data == "channel" && msg == "init" && stat == "ok") {    
         ctimer->StartTik();
     }
     
