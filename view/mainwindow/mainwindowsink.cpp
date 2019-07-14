@@ -102,6 +102,6 @@ void MainWindowSink::UpStreamReciever(const QString& _data, const QString& msg, 
         }
     }
     else {
-        assert(false);
+//        assert(false);
     }
 }

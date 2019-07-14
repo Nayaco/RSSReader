@@ -34,6 +34,10 @@ void Detail_Dialog::setContent(const ArticleData& content) {
     this->content = content;
     ui->detail_title->setText(content.title);
     ui->content->setText(content.description);
+    ui->content->setWordWrap(true);
+    ui->content->adjustSize();
+    ui->content->setAlignment(Qt::AlignLeft);
+    ui->content->setAlignment(Qt::AlignTop);
 }
 
 void Detail_Dialog::slotOpeninBrowser() {
