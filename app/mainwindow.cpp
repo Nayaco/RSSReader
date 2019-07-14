@@ -22,19 +22,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
 
     detail_window = new Detail_Dialog();
 
-    subingurls = new QStandardItemModel(this);
-    QStringList strList;
-    for(int i = 0; i < 30; i++) {
-        strList << ("string" + QString::number(i));
-    }
-    int nCount = strList.size();
-    for(int i = 0; i < nCount; i++) {
-        QString string = static_cast<QString>(strList.at(i));
-        QStandardItem *item = new QStandardItem(string);
-        subingurls->appendRow(item);
-    }
-    ui->subinglist->setModel(subingurls);
-
     articles = new QStandardItemModel(this);
     for(int i = 0; i < 20; i++) {
         QStandardItem* item = new QStandardItem;
@@ -60,9 +47,29 @@ MainWindow::~MainWindow() {
     delete subingurls;
 }
 
+void MainWindow::UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle) {
+    subingurls = new QStandardItemModel(this);
+    QStringList strList;
+
+    for (QVector<QString>::iterator iter = allsubtitle->begin();iter != allsubtitle->end(); iter++) {
+        qDebug() << *iter << "\n";
+        strList << *iter;
+    }
+    for(int i = 0; i < 5; i++) {
+        strList << ("string" + QString::number(i));
+    }
+    int nCount = strList.size();
+    for(int i = 0; i < nCount; i++) {
+        QString string = static_cast<QString>(strList.at(i));
+        QStandardItem *item = new QStandardItem(string);
+        subingurls->appendRow(item);
+    }
+    ui->subinglist->setModel(subingurls);
+}
+
 void MainWindow::slotSubscription() {
     QString msg = ui->suburlinput->text();
-    qDebug() << "[subcription] " << msg;
+    emit SIG_ADDSUB(msg);
 }
 
 void MainWindow::slotItemClicked(QModelIndex idx) {

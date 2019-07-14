@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <memory>
 #include <QMainWindow>
 #include <QStandardItemModel>
 #include "details/detail_dialog.h"
@@ -15,9 +16,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle);
 
 signals:
     void SIG_CLOSE();
+    void SIG_ADDSUB(const QString&);
 
 public slots:
     void slotSubscription();

@@ -10,12 +10,12 @@ Q_OBJECT
 public:
     MainWindowSink();
     ~MainWindowSink() = default;
+    void UpdateSub();
 public
 slots:
     void OnMainWindowClose();
-//    void AddSubcription(const QString&);
-    virtual void UpStreamReciever(
-        const QString&, const QString&, const QString&) override;
+    void AddSubcription(const QString&);
+    virtual void UpStreamReciever(const QString&, const QString&, const QString&) override;
 signals:
 private:
     shared_ptr<MainWindow> mainwindow;
