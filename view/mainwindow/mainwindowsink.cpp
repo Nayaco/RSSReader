@@ -91,6 +91,16 @@ void MainWindowSink::UpStreamReciever(const QString& _data, const QString& msg, 
             exit(1);
         }
     }
+    else if(_data == "channel" && msg == "update") {
+        if(target == "ok") {
+            UpdateSub();
+            UpdateArticle();
+        }
+        else {
+            qDebug() << "[Update failed]";
+            exit(1);
+        }
+    }
     else {
         assert(false);
     }
