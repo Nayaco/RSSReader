@@ -21,6 +21,7 @@ void MainWindowSink::OnMainWindowClose() {
 }
 
 void MainWindowSink::AddSubcription(const QString& url) {
+    loadpage->show();
     qDebug() << "[Add subscription] " << url;
     emit SIG_TRI("channel", "add", url);
 }
@@ -82,9 +83,11 @@ void MainWindowSink::UpStreamReciever(const QString& _data, const QString& msg, 
         if(target == "ok") {
             UpdateSub();
             UpdateArticle();
+            loadpage->close();
         }
         else {
             qDebug() << "[Add subscription ok]";
+            loadpage->close();
             exit(1);
         }
     }
