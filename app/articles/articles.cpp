@@ -47,6 +47,7 @@ void Articles::paint(QPainter *painter, const QStyleOptionViewItem &option, cons
         QRectF titleRect = QRect(iconRect.right() + 5, iconRect.top(), rect.width() - 10 - iconRect.width(), 20);
         QRectF descRect = QRect(titleRect.left(), titleRect.bottom() + 5, rect.width() - 10 - iconRect.width(), 20);
 
+        painter->drawImage(iconRect, curData.img.toImage());
         painter->setPen(QPen(Qt::white));
         painter->drawText(titleRect, curData.title);
 
