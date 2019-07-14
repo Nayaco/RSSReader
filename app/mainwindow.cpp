@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "articles/articles.h"
 #include "articles/articletype.h"
+#include "../model/model.h"
 #include <QtDebug>
 #include <QFile>
 #include <QDir>
@@ -21,21 +22,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
     ui->setupUi(this);
 
     detail_window = new Detail_Dialog();
-
-    articles = new QStandardItemModel(this);
-    for(int i = 0; i < 20; i++) {
-        QStandardItem* item = new QStandardItem;
-        ArticleData curData;
-        curData.link = "string0";
-        curData.title = "This is a title";
-        curData.description = "This is a looooooooong description.";
-        item->setData(QVariant::fromValue(curData), Qt::UserRole + 1);
-        articles->appendRow(item);
-    }
-
-    Articles* pArticles = new Articles(this);
-    ui->listView->setItemDelegate(pArticles);
-    ui->listView->setModel(articles);
 
     connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(slotSubscription()));
     connect(ui->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(slotItemClicked(QModelIndex)));
@@ -65,6 +51,25 @@ void MainWindow::UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle) {
         subingurls->appendRow(item);
     }
     ui->subinglist->setModel(subingurls);
+}
+
+void MainWindow::UpdateRight(std::shared_ptr<QVector<PropertyInstance>> allarticles) {
+    articles = new QStandardItemModel(this);
+    for(QVector<PropertyInstance>::iterator iter = allarticles->begin(); iter != allarticles->end(); iter++) {
+        ChannelInstance tmpval = std::dynamic_pointer_cast<Channel>(*iter);
+        std::shared_ptr<Items> items = tmpval->GetItems();
+        for(QVector<shared_ptr<Item>>::iterator jter = items->begin(); jter != items->end(); jter++) {
+            ArticleData curData;
+            curData = (*jter)->GetArticle();
+            QStandardItem* item = new QStandardItem;
+            item->setData(QVariant::fromValue(curData), Qt::UserRole + 1);
+            articles->appendRow(item);
+        }
+    }
+
+    Articles* pArticles = new Articles(this);
+    ui->listView->setItemDelegate(pArticles);
+    ui->listView->setModel(articles);
 }
 
 void MainWindow::slotSubscription() {

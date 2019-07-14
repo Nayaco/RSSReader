@@ -11,6 +11,7 @@ public:
     MainWindowSink();
     ~MainWindowSink() = default;
     void UpdateSub();
+    void UpdateArticle(const QString& title = "");
 public
 slots:
     void OnMainWindowClose();

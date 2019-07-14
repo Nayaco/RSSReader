@@ -4,6 +4,7 @@
 #include <memory>
 #include <QMainWindow>
 #include <QStandardItemModel>
+#include "../view/sink/viewsink.h"
 #include "details/detail_dialog.h"
 
 namespace Ui {
@@ -17,6 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle);
+    void UpdateRight(std::shared_ptr<QVector<PropertyInstance>> allarticles);
 
 signals:
     void SIG_CLOSE();

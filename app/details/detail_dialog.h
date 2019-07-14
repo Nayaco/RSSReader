@@ -23,6 +23,7 @@ public slots:
 
 private:
     Ui::Detail_Dialog *ui;
+    ArticleData content;
 };
 
 #endif // DETAIL_DIALOG_H

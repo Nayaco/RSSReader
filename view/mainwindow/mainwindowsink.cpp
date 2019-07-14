@@ -20,7 +20,6 @@ void MainWindowSink::OnMainWindowClose() {
 void MainWindowSink::AddSubcription(const QString& url) {
     qDebug() << "[Add subscription] " << url;
     emit SIG_TRI("channel", "add", url);
-    UpdateSub();
 }
 
 void MainWindowSink::UpdateSub() {
@@ -34,6 +33,20 @@ void MainWindowSink::UpdateSub() {
     mainwindow->UpdateLeft(allsubtitle);
 }
 
+void MainWindowSink::UpdateArticle(const QString& title) {
+    shared_ptr<QVector<PropertyInstance>> articles;
+    if(title.isEmpty()) {
+        std::shared_ptr<QVector<QString>> allsubtitle = viewmodel->GetMeta("channel");
+        articles = viewmodel->Get("channel", *allsubtitle);
+    }
+    else {
+        QVector<QString> args;
+        args.push_back(title);
+        articles = viewmodel->Get("channel", args);
+    }
+    mainwindow->UpdateRight(articles);
+}
+
 void MainWindowSink::UpStreamReciever(const QString& _data, const QString& msg, const QString& target) {
     qDebug() << "[=== QAQ ===] " << _data << ' ' << msg << ' ' << target;
     if(_data == "channel" && msg == "init") {
@@ -42,6 +55,7 @@ void MainWindowSink::UpStreamReciever(const QString& _data, const QString& msg, 
             loadpage->close();
             mainwindow->show();
             UpdateSub();
+            UpdateArticle();
         }
         else {
             qDebug() << "[initial failed]";
@@ -51,6 +65,7 @@ void MainWindowSink::UpStreamReciever(const QString& _data, const QString& msg, 
     else if(_data == "channel" && msg == "add") {
         if(target == "ok") {
             UpdateSub();
+            UpdateArticle();
         }
         else {
             qDebug() << "[Add subscription ok]";
