@@ -18,7 +18,7 @@ void ViewModel::BindModel(shared_ptr<Middleware> modelsink) {
 
 void ViewModel::UpStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
-    qDebug() << _data << msg << target;
+    qDebug() << "[VMUp]" << _data << msg << target;
     if(_data == "channel" && msg == "update") {
         if(target == "failed") {
             emit SIG_CMD("channel", "update", meta->value(counter));
@@ -60,6 +60,7 @@ void ViewModel::UpStreamReciever(
 }
 void ViewModel::DownStreamReciever(
     const QString& _data, const QString& msg, const QString& target) {
+    qDebug() << "[VMDown]" <<_data << msg << target;
     if(_data == "channel" && msg == "update") {
         meta = models["channel"]->GetMeta();
         counter = 0;

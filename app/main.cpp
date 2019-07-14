@@ -3,19 +3,19 @@
 void RssReaderCore::UpStreamReciever(
         const QString& data, const QString& msg, const QString& stat) {
     zero ++;
-    qDebug()<<data<<msg<<stat;
-    if(data == "channel" && msg == "update" && stat == "ok" && zero == 1) {    
+    // qDebug()<<data<<msg<<stat;
+    if(data == "channel" && msg == "init" && stat == "ok") {    
         ctimer->StartTik();
     }
     
-    qDebug()<<"--ttttttt-- "<<zero;
-    auto _model = std::dynamic_pointer_cast<Model>(model->GetChild());
+    qDebug()<<"--event-- "<<zero;
+    // auto _model = std::dynamic_pointer_cast<Model>(model->GetChild());
 
-    auto meta = vm->GetMeta("channel");
-    for(auto i: *meta) {
-        qDebug()<<i;
-    }
-    qDebug()<<"--ttttttt-- "<<zero<<"\n";
+    // auto meta = vm->GetMeta("channel");
+    // for(auto i: *meta) {
+    //     qDebug()<<i;
+    // }
+    // qDebug()<<"--ttttttt-- "<<zero<<"\n";
     
 }
 int main(int argc, char *argv[]) {

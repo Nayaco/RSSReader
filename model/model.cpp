@@ -39,14 +39,21 @@ void Model::UpdateChannel(const QString& title) {
     });
 }
 void Model::AddChannel(const QString& url) {
-    if(!busy) 
+    qDebug()<<"add"<<url<<busy;
+    if(!busy) {
         busy = 1;
-    else 
+        iurl = url;
+        iurl.replace("\n", "");
+    }
+    else {
         emit SIG_CHANNEL_FAILED("busy");
+        return;
+    }
     crequest->GetChannel(url, [&](bool success, QString xml, QString _url) {
         if(success) {
             parser->SetDoc(xml);
             newChan = parser->Parse();
+            newChan->SetSource(iurl);
             newItems = newChan->GetItems();
             icounter = 0;
             emit SIG_IMG("cadd");
@@ -161,6 +168,7 @@ void Model::Init() {
     emit SIG_CHANNEL_CHANGE("cinit");
 }
 void Model::Exit() {
+    qDebug()<<"Exiting";
     QString cachePath = QCoreApplication::applicationDirPath() + "/" + RSSCACHE;
     QFile cache(cachePath);
     cache.open(QIODevice::WriteOnly | QIODevice::Text);

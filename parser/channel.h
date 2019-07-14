@@ -47,6 +47,7 @@ private:
     QString csource;
     int     ttl;
     shared_ptr<Items> items;
+    QSet<QString> itemnames;
 };
 
 #endif
