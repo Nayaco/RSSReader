@@ -8,15 +8,7 @@
 class MainWindowSink : public ViewSink {
 Q_OBJECT
 public:
-    MainWindowSink() {
-        loadpage = std::make_shared<loading_page>();
-        mainwindow = std::make_shared<MainWindow>();
-
-        connect(mainwindow.get(), SIGNAL(SIG_CLOSE()), this, SLOT(OnMainWindowClose()));
-//        connect(mainwindow.get(), SIGNAL(SIG_ADDSUB(const QString&)), this, SLOT(AddSubcription(const QString&)));
-
-        loadpage->show();
-    }
+    MainWindowSink();
     ~MainWindowSink() = default;
 public
 slots:
