@@ -31,12 +31,13 @@ Detail_Dialog::~Detail_Dialog() {
 }
 
 void Detail_Dialog::setContent(const ArticleData& content) {
+    this->content = content;
     ui->detail_title->setText(content.title);
     ui->content->setText(content.description);
 }
 
 void Detail_Dialog::slotOpeninBrowser() {
-    QDesktopServices::openUrl(QUrl("http://www.baidu.com"));
+    QDesktopServices::openUrl(QUrl(this->content.link));
 
     qDebug() << "[Open in Browser] ...";
 }

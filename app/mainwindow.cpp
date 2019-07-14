@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "articles/articles.h"
 #include "articles/articletype.h"
+#include "../model/model.h"
 #include <QtDebug>
 #include <QFile>
 #include <QDir>
@@ -22,9 +23,24 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
 
     detail_window = new Detail_Dialog();
 
+    connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(slotSubscription()));
+    connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotArticleClicked(QModelIndex)));
+}
+
+MainWindow::~MainWindow() {
+    delete ui;
+    delete subingurls;
+}
+
+void MainWindow::UpdateLeft(std::shared_ptr<QVector<QString>> allsubtitle) {
     subingurls = new QStandardItemModel(this);
     QStringList strList;
-    for(int i = 0; i < 30; i++) {
+
+    for (QVector<QString>::iterator iter = allsubtitle->begin();iter != allsubtitle->end(); iter++) {
+        qDebug() << *iter << "\n";
+        strList << *iter;
+    }
+    for(int i = 0; i < 5; i++) {
         strList << ("string" + QString::number(i));
     }
     int nCount = strList.size();
@@ -34,39 +50,30 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent = nullptr), ui(new 
         subingurls->appendRow(item);
     }
     ui->subinglist->setModel(subingurls);
+}
 
+void MainWindow::UpdateRight(std::shared_ptr<QVector<PropertyInstance>> allarticles) {
     articles = new QStandardItemModel(this);
-    for(int i = 0; i < 20; i++) {
-        QStandardItem* item = new QStandardItem;
-        ArticleData curData;
-        curData.link = "string0";
-        curData.title = "This is a title";
-        curData.description = "This is a looooooooong description.";
-        item->setData(QVariant::fromValue(curData), Qt::UserRole + 1);
-        articles->appendRow(item);
+    for(QVector<PropertyInstance>::iterator iter = allarticles->begin(); iter != allarticles->end(); iter++) {
+        ChannelInstance tmpval = std::dynamic_pointer_cast<Channel>(*iter);
+        std::shared_ptr<Items> items = tmpval->GetItems();
+        for(QVector<shared_ptr<Item>>::iterator jter = items->begin(); jter != items->end(); jter++) {
+            ArticleData curData;
+            curData = (*jter)->GetArticle();
+            QStandardItem* item = new QStandardItem;
+            item->setData(QVariant::fromValue(curData), Qt::UserRole + 1);
+            articles->appendRow(item);
+        }
     }
 
     Articles* pArticles = new Articles(this);
     ui->listView->setItemDelegate(pArticles);
     ui->listView->setModel(articles);
-
-    connect(ui->subbutton, SIGNAL(clicked()), this, SLOT(slotSubscription()));
-    connect(ui->subinglist, SIGNAL(clicked(QModelIndex)), this, SLOT(slotItemClicked(QModelIndex)));
-    connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotArticleClicked(QModelIndex)));
-}
-
-MainWindow::~MainWindow() {
-    delete ui;
-    delete subingurls;
 }
 
 void MainWindow::slotSubscription() {
     QString msg = ui->suburlinput->text();
-    qDebug() << "[subcription] " << msg;
-}
-
-void MainWindow::slotItemClicked(QModelIndex idx) {
-    qDebug() << "[click item] " << idx.data().toString();
+    emit SIG_ADDSUB(msg);
 }
 
 void MainWindow::slotArticleClicked(QModelIndex idx) {
