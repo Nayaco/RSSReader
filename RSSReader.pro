@@ -70,9 +70,9 @@ HEADERS += \
         middlelayer/viewmodel.h
 
 FORMS += \
-        app/details/detail_dialog.ui \
-        app/loading/loading_page.ui \
-        app/mainwindow.ui
+        uidesign/detail_dialog.ui \
+        uidesign/loading_page.ui \
+        uidesign/mainwindow.ui
 
 RESOURCES += \
         app/qdarkstyle/style.qrc\
