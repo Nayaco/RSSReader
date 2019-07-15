@@ -3,7 +3,6 @@
 
 ## TODOS
 
-
 - [x] xml requester
     
     - [x] polling
@@ -15,7 +14,5 @@
 - [x] image parser
 
 - [x] channel container
-
-- [ ] notification
 
 - [x] UI
