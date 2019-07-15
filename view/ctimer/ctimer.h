@@ -4,7 +4,6 @@
 #include "common/middleware.h"
 #include "common/property.h"
 #include "../sink/viewsink.h"
-#include "middlelayer/viewmodel.h"
 #include <QTimer>
 class CTimer : public ViewSink {
     Q_OBJECT
