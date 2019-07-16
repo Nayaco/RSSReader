@@ -4,8 +4,8 @@
 
 + 本项目实现RSS订阅源的管理和阅读，实现了网络抓取RSS推送的功能
 
-+ 项目详细报告见[Doc/MiniGrapher总体报告]()
-+ 项目详细需求文档见[doc/ReuqestAnalisis]()
++ 项目详细报告见[doc/GroupReport](https://github.com/Nayaco/RSSReader/blob/master/doc/GroupReport.md)
++ 项目需求文档见[doc/ReuqestAnalisis](https://github.com/Nayaco/RSSReader/blob/master/doc/RequestAnalysis.md)
 
 ## 项目概况
 
@@ -59,5 +59,5 @@
     + [黄山](https://github.com/dydxh)
 
 
-    + [郑泽晖]()
+    + [郑泽晖](https://github.com/zhengzh23333)
         + viewmodel基本功能实现

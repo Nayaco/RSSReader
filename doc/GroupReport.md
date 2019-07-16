@@ -33,7 +33,7 @@
 + 组员
     + [黄山](https://github.com/dydxh)
 
-    + [郑泽晖]()
+    + [郑泽晖](https://github.com/zhengzh23333)
         + viewmodel基本功能实现
 
 ## 每轮迭代效果说明
