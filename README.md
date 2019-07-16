@@ -57,7 +57,9 @@
         + App层组装、单元测试代码编写、二进制文件发布
 + 组员
     + [黄山](https://github.com/dydxh)
-
+      + 应用程序 UI 设计、美化与实现
+      + 负责 View 层设计与实现
+      + View 层与 ViewModel 层对接
 
     + [郑泽晖](https://github.com/zhengzh23333)
         + viewmodel基本功能实现
