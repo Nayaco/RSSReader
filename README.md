@@ -30,18 +30,18 @@
 
 ### 测试截图
 
-![test_result](img/model1.png)
+![test_result](doc/img/model1.png)
 
 ### 运行截图
 
 + 添加订阅源
-![test_result](img/add.gif)
+![test_result](doc/img/add.gif)
 
 + 订阅源摘要
-![test_result](img/read1.gif)
+![test_result](doc/img/read1.gif)
 
 + 文章详情页面
-![test_result](img/read2.gif)
+![test_result](doc/img/read2.gif)
 
 ## 项目目录
 ```
