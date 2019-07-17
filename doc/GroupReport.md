@@ -88,16 +88,122 @@
 ### 最终运行效果图
 
 + 添加订阅源
-![test_result](img/add.gif)
+![add](img/add.gif)
 
 + 订阅源摘要
-![test_result](img/read1.gif)
+![summary](img/read1.gif)
 
 + 文章详情页面
-![test_result](img/read2.gif)
+![detail](img/read2.gif)
 
 ## 项目目录
 ```
+.
+├── app
+│   ├── articles
+│   │   ├── articles.cpp
+│   │   ├── articles.h
+│   │   └── articletype.h
+│   ├── details
+│   │   ├── detail_dialog.cpp
+│   │   └── detail_dialog.h
+│   ├── loading
+│   │   ├── loading.cpp
+│   │   ├── loading.h
+│   │   ├── loading_page.cpp
+│   │   └── loading_page.h
+│   ├── main.cpp
+│   ├── main.h
+│   ├── mainwindow.cpp
+│   ├── mainwindow.h
+│   └── qdarkstyle
+│       ├── style.qrc
+│       └── style.qss
+├── bin
+├── common
+│   ├── common.h
+│   ├── commonstream.h
+│   ├── middleware.h
+│   └── property.h
+├── doc
+│   ├── GroupReport.md
+│   ├── img
+│   │   ├── add.gif
+│   │   ├── model1.png
+│   │   ├── read1.gif
+│   │   ├── read2.gif
+│   │   ├── view1.png
+│   │   ├── view2.png
+│   │   ├── view3.png
+│   │   ├── viewdis2.png
+│   │   ├── viewdis3.png
+│   │   └── viewdis.png
+│   ├── personal-report-HuangShan.md
+│   ├── personal-report-ZhangWenjie.md
+│   ├── personal-report-ZhengZehui.md
+│   └── RequestAnalysis.md
+├── externalLib
+│   ├── tinyxml2.cpp
+│   ├── tinyxml2.h
+│   └── tinyxml2.o
+├── images
+│   ├── default_img.jpeg
+│   └── images.qrc
+├── Makefile
+├── middlelayer
+│   ├── viewmodel.cpp
+│   └── viewmodel.h
+├── model
+│   ├── crequest
+│   │   ├── crequest.cpp
+│   │   └── crequest.h
+│   ├── irequest
+│   │   ├── irequest.cpp
+│   │   └── irequest.h
+│   ├── model.cpp
+│   ├── model.h
+│   └── sink
+│       ├── modelsink.cpp
+│       └── modelsink.h
+├── parser
+│   ├── channel.cpp
+│   ├── channel.h
+│   ├── item.cpp
+│   ├── item.h
+│   ├── RSSparser.cpp
+│   └── RSSparser.h
+├── README.md
+├── request
+│   ├── request.cpp
+│   └── request.h
+├── RSSReader.pro
+├── testMid.pro
+├── testModel.pro
+├── testParser.pro
+├── testReg.pro
+├── tests
+│   ├── Makefile
+│   ├── parseTest.cpp
+│   ├── testMiddleware.cpp
+│   ├── testMiddleware.h
+│   ├── testModel.cpp
+│   ├── testModel.h
+│   └── testReg.cpp
+├── uidesign
+│   ├── detail_dialog.ui
+│   ├── loading_page.ui
+│   └── mainwindow.ui
+└── view
+    ├── ctimer
+    │   ├── ctimer.cpp
+    │   └── ctimer.h
+    ├── mainwindow
+    │   ├── mainwindowsink.cpp
+    │   └── mainwindowsink.h
+    └── sink
+        └── viewsink.h
+
+24 directories, 79 files
 ```
 
 
